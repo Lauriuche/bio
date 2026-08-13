@@ -27,8 +27,7 @@
                             50: '#f7f7f7', 100: '#e3e3e3', 200: '#c8c8c8', 300: '#a4a4a4',
                             400: '#818181', 500: '#666666', 600: '#515151', 700: '#434343',
                             800: '#383838', 900: '#1a1a1a', 950: '#0d0d0d',
-                        },
-                        gold: { 400: '#d4af37', 500: '#c9a227', 600: '#a8841a' }
+                        }
                     },
                     boxShadow: {
                         'soft': '0 4px 24px -4px rgba(0,0,0,0.08)',
@@ -65,45 +64,27 @@
 
         .modal-overlay {
             position: fixed; inset: 0;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(12px);
-            z-index: 100; display: none;
-            align-items: flex-end; justify-content: center;
-        }
-        @media (min-width: 500px) {
-            .modal-overlay { align-items: center; padding: 24px; }
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
         .modal-sheet {
-            background: #fff; width: 100%; max-width: 420px;
-            border-radius: 28px 28px 0 0; max-height: 92vh;
+            background: #fff; width: 100%; max-width: 400px;
+            border-radius: 24px; max-height: 90vh;
             overflow: hidden; display: flex; flex-direction: column;
             animation: rise 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
         .dark .modal-sheet { background: #111; }
-        @media (min-width: 500px) { .modal-sheet { border-radius: 28px; } }
 
         @keyframes rise {
-            from { transform: translateY(60px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .chat-bubble {
-            padding: 12px 16px; border-radius: 16px;
-            font-size: 14px; max-width: 85%; line-height: 1.5;
-        }
-        .chat-bubble.user {
-            background: #1a1a1a; color: #fff;
-            align-self: flex-end; border-bottom-right-radius: 4px;
-        }
-        .dark .chat-bubble.user { background: #d4af37; color: #0d0d0d; }
-        .chat-bubble.ai {
-            background: #f4f4f4; color: #1a1a1a;
-            align-self: flex-start; border-bottom-left-radius: 4px;
-        }
-        .dark .chat-bubble.ai { background: #1f1f1f; color: #e5e5e5; }
-        .chat-bubble.system {
-            background: #fef9e7; color: #7a5c00;
-            align-self: center; font-size: 12px; text-align: center;
-            border-radius: 12px; max-width: 90%;
+            from { transform: translateY(40px) scale(0.96); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
         }
 
         .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -117,20 +98,34 @@
         .dark .loading-screen { background: #0d0d0d; }
 
         .admin-link-item {
-            background: #f8f8f8;
-            border-radius: 14px;
-            padding: 12px;
-            margin-bottom: 10px;
+            background: #f8f8f8; border-radius: 14px; padding: 12px; margin-bottom: 10px;
         }
-        .dark .admin-link-item {
-            background: #1a1a1a;
+        .dark .admin-link-item { background: #1a1a1a; }
+
+        :root { --accent: #c9a227; }
+        .theme-gold { --accent: #c9a227; }
+        .theme-sky { --accent: #0ea5e9; }
+        .theme-emerald { --accent: #10b981; }
+        .theme-violet { --accent: #8b5cf6; }
+        .theme-rose { --accent: #f43f5e; }
+        .theme-ink { --accent: #1a1a1a; }
+
+        .accent-bg { background-color: var(--accent) !important; }
+        .accent-text { color: var(--accent) !important; }
+        .accent-dot { background-color: var(--accent) !important; }
+        .accent-btn {
+            background-color: var(--accent) !important;
+            color: #fff !important;
         }
+        .dark .theme-ink .accent-btn { color: #0d0d0d !important; }
+        .dark .accent-btn { color: #0d0d0d !important; }
+        .theme-ink .accent-btn { color: #fff !important; }
     </style>
 </head>
 <body class="bg-[#f5f5f5] dark:bg-[#0d0d0d] text-ink-900 dark:text-ink-100 transition-colors duration-300">
 
     <div id="loading-overlay" class="loading-screen">
-        <div class="w-10 h-10 border-2 border-ink-200 dark:border-ink-700 border-t-ink-900 dark:border-t-gold-400 rounded-full animate-spin"></div>
+        <div class="w-10 h-10 border-2 border-ink-200 dark:border-ink-700 rounded-full animate-spin" style="border-top-color: var(--accent)"></div>
         <p class="text-xs tracking-[0.2em] uppercase text-ink-400 font-medium">Vagner Lauriuche</p>
     </div>
 
@@ -138,7 +133,7 @@
 
         <div class="sticky top-0 z-40 px-6 h-14 flex items-center justify-between bg-[#fafafa]/80 dark:bg-[#111]/80 backdrop-blur-xl">
             <div class="flex items-center gap-2">
-                <div class="w-1.5 h-1.5 rounded-full bg-gold-500"></div>
+                <div class="w-1.5 h-1.5 rounded-full accent-dot"></div>
                 <span class="text-[11px] tracking-[0.18em] uppercase font-semibold text-ink-500 dark:text-ink-400">Official</span>
             </div>
             <div class="flex items-center gap-3">
@@ -152,7 +147,7 @@
             </div>
         </div>
 
-        <div class="px-6 pt-4 pb-10">
+        <div class="px-6 pt-6 pb-10">
             <div class="flex justify-center mb-7">
                 <div class="relative cursor-pointer"
                      oncontextmenu="abrirAdmin(); return false;"
@@ -160,8 +155,8 @@
                     <div class="w-[128px] h-[128px] rounded-full overflow-hidden shadow-elevated ring-1 ring-black/5 dark:ring-white/10">
                         <img id="profile-img" src="" alt="Vagner Lauriuche" class="w-full h-full object-cover">
                     </div>
-                    <div class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-ink-900 dark:bg-gold-500 flex items-center justify-center shadow-soft">
-                        <i class="fas fa-check text-white dark:text-ink-950 text-[10px]"></i>
+                    <div class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full accent-bg flex items-center justify-center shadow-soft">
+                        <i class="fas fa-check text-white text-[10px]"></i>
                     </div>
                 </div>
             </div>
@@ -171,37 +166,7 @@
                 <p class="text-sm text-ink-400 dark:text-ink-500 font-medium tracking-wide" id="username-handle">@Vagner_lauriuche</p>
             </div>
 
-            <p class="text-center text-[14.5px] leading-relaxed text-ink-600 dark:text-ink-300 max-w-[340px] mx-auto whitespace-pre-line mb-8" id="bio-text"></p>
-
-            <div class="flex items-center justify-center gap-10 mb-8">
-                <div class="text-center">
-                    <div class="text-xl font-bold tracking-tight" id="posts-count">—</div>
-                    <div class="text-[10px] tracking-[0.15em] uppercase text-ink-400 mt-0.5">Posts</div>
-                </div>
-                <div class="w-px h-9 bg-ink-200 dark:bg-ink-800"></div>
-                <div class="text-center">
-                    <div class="text-xl font-bold tracking-tight" id="followers-count">—</div>
-                    <div class="text-[10px] tracking-[0.15em] uppercase text-ink-400 mt-0.5">Seguidores</div>
-                </div>
-                <div class="w-px h-9 bg-ink-200 dark:bg-ink-800"></div>
-                <div class="text-center">
-                    <div class="text-xl font-bold tracking-tight" id="following-count">—</div>
-                    <div class="text-[10px] tracking-[0.15em] uppercase text-ink-400 mt-0.5">Seguindo</div>
-                </div>
-            </div>
-
-            <div class="flex gap-3 mb-10">
-                <button class="flex-1 h-12 rounded-2xl bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950 font-semibold text-sm tracking-wide active:scale-[0.98] transition shadow-soft">
-                    Seguir
-                </button>
-                <button onclick="abrirDM()" class="flex-1 h-12 rounded-2xl neo-card font-semibold text-sm tracking-wide text-ink-800 dark:text-ink-100 active:scale-[0.98] transition">
-                    Mensagem
-                </button>
-            </div>
-
-            <div class="mb-10">
-                <div class="flex gap-3 overflow-x-auto scrollbar-hide pb-1 -mx-1 px-1" id="highlights-container"></div>
-            </div>
+            <p class="text-center text-[14.5px] leading-relaxed text-ink-600 dark:text-ink-300 max-w-[340px] mx-auto whitespace-pre-line mb-10" id="bio-text"></p>
 
             <div class="space-y-8" id="links-wrapper"></div>
 
@@ -210,66 +175,33 @@
                 <p class="text-[11px] tracking-[0.2em] uppercase text-ink-400 dark:text-ink-600 font-medium">Vagner Lauriuche</p>
             </div>
         </div>
-
-        <div class="fixed bottom-7 right-0 left-0 z-40 flex justify-center pointer-events-none" style="max-width:460px; margin:0 auto;">
-            <div class="w-full px-6 flex justify-end pointer-events-none">
-                <button onclick="abrirModalPorId('chat-ai')"
-                        class="pointer-events-auto w-13 h-13 rounded-2xl bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950 shadow-elevated flex items-center justify-center active:scale-95 transition-all">
-                    <i class="fas fa-comment-dots text-lg"></i>
-                </button>
-            </div>
-        </div>
     </div>
 
-    <!-- MODAL -->
-    <div id="story-modal" class="modal-overlay" onclick="fecharModal(event)">
+    <!-- ==================== BANNER DE DIVULGAÇÃO ==================== -->
+    <div id="banner-modal" class="modal-overlay" style="display:none;" onclick="fecharBanner(event)">
         <div class="modal-sheet" onclick="event.stopPropagation()">
-            <div class="absolute top-5 right-5 z-20">
-                <button onclick="fecharModal(event)" class="w-9 h-9 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center">
-                    <i class="fas fa-times text-sm text-ink-600 dark:text-ink-300"></i>
-                </button>
+            <button onclick="fecharBanner()" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center">
+                <i class="fas fa-times text-sm"></i>
+            </button>
+
+            <div id="banner-imagem-wrap" class="hidden w-full h-44 overflow-hidden bg-ink-100 dark:bg-ink-900">
+                <img id="banner-imagem" src="" class="w-full h-full object-cover" alt="">
             </div>
 
-            <div class="pt-10 pb-6 px-6 flex flex-col items-center border-b border-ink-100 dark:border-ink-800">
-                <div class="w-16 h-16 rounded-full overflow-hidden mb-4 ring-1 ring-black/5 dark:ring-white/10" id="modal-icon-container"></div>
-                <h3 class="font-display text-xl font-bold" id="modal-title">Título</h3>
-            </div>
-
-            <div id="modal-body-container" class="flex-1 overflow-y-auto px-6 py-6">
-                <div class="text-[14.5px] leading-relaxed text-ink-600 dark:text-ink-300" id="modal-body"></div>
-                <button onclick="fecharModal(event)" class="mt-8 w-full h-12 rounded-2xl bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950 font-semibold text-sm active:scale-[0.98] transition">
-                    Fechar
-                </button>
-            </div>
-
-            <div id="dm-interface" class="hidden flex-col px-6 py-6">
-                <p class="text-sm text-ink-500 dark:text-ink-400 mb-5 text-center">Sua mensagem será enviada via WhatsApp</p>
-                <textarea id="dm-text" rows="4" class="w-full bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-2xl p-4 text-sm outline-none focus:ring-1 focus:ring-ink-300 dark:focus:ring-gold-500/50 resize-none mb-4" placeholder="Olá Vagner, gostaria de falar sobre..."></textarea>
-                <button onclick="enviarDMWhatsApp()" class="w-full h-12 rounded-2xl bg-[#25D366] text-white font-semibold flex items-center justify-center gap-2 active:scale-[0.98] transition">
-                    <i class="fab fa-whatsapp text-lg"></i> Enviar no WhatsApp
-                </button>
-            </div>
-
-            <div id="chat-interface" class="hidden flex-col flex-1 min-h-0">
-                <div id="chat-messages" class="flex-1 overflow-y-auto p-5 flex flex-col gap-3 bg-ink-50/50 dark:bg-black/20">
-                    <div class="chat-bubble ai">Olá. Sou o assistente de Vagner Lauriuche. Como posso ajudar?</div>
-                </div>
-                <div id="typing-indicator" class="hidden text-xs text-ink-400 italic px-5 py-1">Escrevendo...</div>
-                <div class="p-4 border-t border-ink-100 dark:border-ink-800 flex gap-2">
-                    <input type="text" id="chat-input" placeholder="Escreva sua mensagem..."
-                           class="flex-1 bg-ink-50 dark:bg-ink-900 rounded-full px-4 py-2.5 text-sm outline-none border border-ink-100 dark:border-ink-800 focus:ring-1 focus:ring-ink-300 dark:focus:ring-gold-500/40"
-                           onkeypress="handleEnter(event)">
-                    <button onclick="processarEnvio()" class="w-10 h-10 rounded-full bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950 flex items-center justify-center active:scale-95 transition">
-                        <i class="fas fa-arrow-up text-sm"></i>
-                    </button>
-                </div>
+            <div class="p-6 text-center">
+                <h3 class="font-display text-xl font-bold mb-2" id="banner-titulo">Título</h3>
+                <p class="text-sm text-ink-500 dark:text-ink-400 leading-relaxed mb-6" id="banner-texto">Texto do banner</p>
+                <a id="banner-botao" href="#" target="_blank"
+                   class="block w-full h-12 rounded-2xl accent-btn font-semibold text-sm flex items-center justify-center active:scale-[0.98] transition">
+                    Saiba mais
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- ADMIN -->
+    <!-- ==================== ADMIN ==================== -->
     <div id="admin-modal" class="modal-overlay" style="display:none;" onclick="fecharAdmin()">
-        <div class="modal-sheet" onclick="event.stopPropagation()">
+        <div class="modal-sheet" onclick="event.stopPropagation()" style="max-height:92vh;">
             <div class="p-6 overflow-y-auto max-h-[92vh]">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="font-display text-xl font-bold">Admin</h3>
@@ -278,31 +210,24 @@
                     </button>
                 </div>
 
-                <!-- LOGIN -->
                 <div id="admin-login">
                     <p class="text-sm text-ink-500 mb-4">Acesso restrito</p>
                     <input type="password" id="admin-password" placeholder="Senha"
-                           class="w-full h-12 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-2xl px-4 mb-3 outline-none focus:ring-1 focus:ring-ink-300">
-                    <button onclick="verificarSenhaAdmin()" class="w-full h-12 rounded-2xl bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950 font-semibold">
-                        Entrar
-                    </button>
-                    <p class="text-xs text-center text-ink-400 mt-4">Senha padrão: <strong>admin123</strong></p>
+                           class="w-full h-12 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-2xl px-4 mb-3 outline-none">
+                    <button onclick="verificarSenhaAdmin()" class="w-full h-12 rounded-2xl accent-btn font-semibold">Entrar</button>
+                    <p class="text-xs text-center text-ink-400 mt-4">Altere ADMIN_PASSWORD no código</p>
                 </div>
 
-                <!-- CONTEÚDO ADMIN -->
                 <div id="admin-content" class="hidden space-y-5">
 
-                    <!-- Abas do Admin -->
-                    <div class="flex gap-2 mb-2">
-                        <button onclick="mostrarAbaAdmin('perfil')" id="tab-perfil" class="flex-1 h-10 rounded-xl text-sm font-semibold bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950">
-                            Perfil
-                        </button>
-                        <button onclick="mostrarAbaAdmin('links')" id="tab-links" class="flex-1 h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">
-                            Links
-                        </button>
+                    <div class="flex gap-2 mb-2 flex-wrap">
+                        <button onclick="mostrarAbaAdmin('perfil')" id="tab-perfil" class="flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold accent-btn">Perfil</button>
+                        <button onclick="mostrarAbaAdmin('links')" id="tab-links" class="flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Links</button>
+                        <button onclick="mostrarAbaAdmin('banner')" id="tab-banner" class="flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Banner</button>
+                        <button onclick="mostrarAbaAdmin('tema')" id="tab-tema" class="flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Tema</button>
                     </div>
 
-                    <!-- ABA PERFIL -->
+                    <!-- PERFIL -->
                     <div id="aba-perfil" class="space-y-4">
                         <div>
                             <label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Usuário</label>
@@ -316,45 +241,108 @@
                             <label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Bio</label>
                             <textarea id="adm-bio" rows="4" class="w-full mt-1.5 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 py-2.5 text-sm outline-none"></textarea>
                         </div>
-                        <div class="grid grid-cols-3 gap-3">
-                            <div>
-                                <label class="text-[11px] text-ink-400 font-semibold">Posts</label>
-                                <input id="adm-posts" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm">
-                            </div>
-                            <div>
-                                <label class="text-[11px] text-ink-400 font-semibold">Seguidores</label>
-                                <input id="adm-followers" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm">
-                            </div>
-                            <div>
-                                <label class="text-[11px] text-ink-400 font-semibold">Seguindo</label>
-                                <input id="adm-following" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm">
-                            </div>
-                        </div>
                         <div>
-                            <label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">URL da Foto</label>
-                            <input id="adm-avatar" class="w-full h-11 mt-1.5 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm">
+                            <label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Foto de perfil (URL)</label>
+                            <input id="adm-avatar" placeholder="https://..." class="w-full h-11 mt-1.5 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none">
+                            <p class="text-[10px] text-ink-400 mt-1">Cole o link direto da imagem (PNG, JPG ou WebP)</p>
                         </div>
                         <div>
                             <label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">WhatsApp</label>
-                            <input id="adm-whatsapp" class="w-full h-11 mt-1.5 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm" placeholder="5511999999999">
+                            <input id="adm-whatsapp" class="w-full h-11 mt-1.5 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" placeholder="5511999999999">
                         </div>
                     </div>
 
-                    <!-- ABA LINKS -->
+                    <!-- LINKS -->
                     <div id="aba-links" class="hidden space-y-4">
                         <div class="flex items-center justify-between">
                             <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Gerenciar Links</p>
-                            <button onclick="adicionarNovoLink()" class="text-xs font-semibold text-gold-500 flex items-center gap-1">
-                                <i class="fas fa-plus"></i> Novo Link
+                            <button onclick="adicionarNovoLink()" class="text-xs font-semibold accent-text flex items-center gap-1">
+                                <i class="fas fa-plus"></i> Novo
                             </button>
                         </div>
+                        <div id="admin-links-list" class="space-y-3 max-h-[48vh] overflow-y-auto pr-1"></div>
+                    </div>
 
-                        <div id="admin-links-list" class="space-y-3 max-h-[50vh] overflow-y-auto pr-1">
-                            <!-- Links serão renderizados aqui -->
+                    <!-- BANNER -->
+                    <div id="aba-banner" class="hidden space-y-4">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Banner de divulgação</p>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <span class="text-xs text-ink-500">Ativo</span>
+                                <input type="checkbox" id="adm-banner-ativo" class="w-5 h-5 rounded accent-color">
+                            </label>
+                        </div>
+
+                        <div>
+                            <label class="text-[11px] text-ink-400 font-semibold">Título</label>
+                            <input id="adm-banner-titulo" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-ink-400 font-semibold">Texto</label>
+                            <textarea id="adm-banner-texto" rows="3" class="w-full mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 py-2.5 text-sm outline-none"></textarea>
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-ink-400 font-semibold">Imagem do banner (URL opcional)</label>
+                            <input id="adm-banner-imagem" placeholder="https://..." class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-ink-400 font-semibold">Texto do botão</label>
+                            <input id="adm-banner-botao-texto" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" placeholder="Saiba mais">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-ink-400 font-semibold">Link do botão</label>
+                            <input id="adm-banner-botao-url" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" placeholder="https://...">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-[11px] text-ink-400 font-semibold">Delay (segundos)</label>
+                                <input type="number" id="adm-banner-delay" min="0" max="30" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" value="1">
+                            </div>
+                            <div>
+                                <label class="text-[11px] text-ink-400 font-semibold">Máx. exibições</label>
+                                <input type="number" id="adm-banner-max" min="0" max="99" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" value="3">
+                                <p class="text-[10px] text-ink-400 mt-1">0 = sempre mostrar</p>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="testarBanner()" class="w-full h-10 rounded-xl border border-ink-200 dark:border-ink-700 text-sm font-medium">
+                            Testar banner agora
+                        </button>
+                    </div>
+
+                    <!-- TEMA -->
+                    <div id="aba-tema" class="hidden space-y-4">
+                        <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Cor de destaque</p>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="selecionarTema('gold')" data-tema="gold" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-[#c9a227]/15">
+                                <div class="w-6 h-6 rounded-full bg-[#c9a227]"></div>
+                                <span class="text-[10px] font-medium">Gold</span>
+                            </button>
+                            <button onclick="selecionarTema('sky')" data-tema="sky" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-[#0ea5e9]/15">
+                                <div class="w-6 h-6 rounded-full bg-[#0ea5e9]"></div>
+                                <span class="text-[10px] font-medium">Sky</span>
+                            </button>
+                            <button onclick="selecionarTema('emerald')" data-tema="emerald" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-[#10b981]/15">
+                                <div class="w-6 h-6 rounded-full bg-[#10b981]"></div>
+                                <span class="text-[10px] font-medium">Emerald</span>
+                            </button>
+                            <button onclick="selecionarTema('violet')" data-tema="violet" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-[#8b5cf6]/15">
+                                <div class="w-6 h-6 rounded-full bg-[#8b5cf6]"></div>
+                                <span class="text-[10px] font-medium">Violet</span>
+                            </button>
+                            <button onclick="selecionarTema('rose')" data-tema="rose" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-[#f43f5e]/15">
+                                <div class="w-6 h-6 rounded-full bg-[#f43f5e]"></div>
+                                <span class="text-[10px] font-medium">Rose</span>
+                            </button>
+                            <button onclick="selecionarTema('ink')" data-tema="ink" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-ink-900/10 dark:bg-white/10">
+                                <div class="w-6 h-6 rounded-full bg-ink-900 dark:bg-white"></div>
+                                <span class="text-[10px] font-medium">Ink</span>
+                            </button>
                         </div>
                     </div>
 
-                    <button onclick="salvarPerfilAdmin()" id="btn-salvar" class="w-full h-12 rounded-2xl bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950 font-semibold mt-2">
+                    <button onclick="salvarPerfilAdmin()" id="btn-salvar" class="w-full h-12 rounded-2xl accent-btn font-semibold mt-2">
                         Salvar no Firebase
                     </button>
                 </div>
@@ -363,9 +351,8 @@
     </div>
 
     <script>
-        // ======================================================
-        // FIREBASE + REALTIME DATABASE
-        // ======================================================
+        const ADMIN_PASSWORD = "admin123"; // ← altere a senha aqui
+
         const firebaseConfig = {
             apiKey: "AIzaSyBBOiQd-zuLsUei5Q7aDRWoN7r-e2l8LBQ",
             authDomain: "minha-bio-434e1.firebaseapp.com",
@@ -380,20 +367,26 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
         const PROFILE_ID = "vagner";
-        const ADMIN_PASSWORD = "admin123";
 
         const defaultPerfil = {
             usuario: "Vagner_lauriuche",
             nome: "Vagner Lauriuche",
             imagem: "foto.png",
-            posts: "1.2k",
-            seguidores: "5M",
-            seguindo: "500",
             bio: `Bacharel em Zootecnia  ·  MBA Agronegócios
 MBA Indústria, Produto e Inovação  ·  Administração
 Visual Content Creator`,
-            linkBio: "",
             whatsapp: "5511999999999",
+            tema: "gold",
+            banner: {
+                ativo: false,
+                titulo: "Novidade!",
+                texto: "Confira meus cursos e conteúdos exclusivos.",
+                imagem: "",
+                botaoTexto: "Quero saber mais",
+                botaoUrl: "https://",
+                delaySegundos: 1,
+                maxExibicoes: 3
+            },
             categorias: [
                 {
                     titulo: "Contato",
@@ -413,30 +406,31 @@ Visual Content Creator`,
                 {
                     titulo: "Formação & Cursos",
                     links: [
-                        { titulo: "Portfólio de Cursos", subtitulo: "Lista completa", url: "#", modalId: "cursos", icone: "fas fa-graduation-cap", corIcone: "text-white", bgIcone: "bg-ink-900 dark:bg-gold-500" }
+                        { titulo: "Portfólio de Cursos", subtitulo: "Lista completa", url: "https://kiwify.app/p5jTccC?afid=8UCMgMdG", icone: "fas fa-graduation-cap", corIcone: "text-white", bgIcone: "bg-ink-900" }
                     ]
                 }
-            ],
-            destaques: [
-                { id: 'sobre', emoji: "01", texto: "Sobre",
-                  conteudo: `<div class="space-y-5"><p class="leading-relaxed">Profissional multidisciplinar que une ciência do agronegócio à criação de conteúdo visual de alto impacto.</p><div class="space-y-3"><div class="flex gap-3 items-start"><span class="text-gold-500 font-bold text-sm mt-0.5">01</span><div><p class="font-semibold text-ink-900 dark:text-white text-sm">Formação</p><p class="text-sm text-ink-500 dark:text-ink-400 mt-0.5">Zootecnia · MBA Agronegócios · MBA Inovação · Administração</p></div></div><div class="flex gap-3 items-start"><span class="text-gold-500 font-bold text-sm mt-0.5">02</span><div><p class="font-semibold text-ink-900 dark:text-white text-sm">Atuação</p><p class="text-sm text-ink-500 dark:text-ink-400 mt-0.5">Visual Content Creator · Estratégia de comunicação no agronegócio</p></div></div></div></div>`
-                },
-                { id: 'cursos', emoji: "02", texto: "Cursos",
-                  conteudo: `<p class="mb-5 text-ink-500 dark:text-ink-400">Cursos selecionados:</p><div class="space-y-3"><a href="https://kiwify.app/p5jTccC?afid=8UCMgMdG" target="_blank" class="block w-full py-3.5 px-4 rounded-2xl bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950 font-semibold text-center text-sm">Fórmula Youtube Viral</a><a href="https://kiwify.app/4ebavr1?afid=TYHkKSYE" target="_blank" class="block w-full py-3.5 px-4 rounded-2xl bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950 font-semibold text-center text-sm">Hype AI</a><a href="https://kiwify.app/2pCGGUH?afid=w0RKQQXF" target="_blank" class="block w-full py-3.5 px-4 rounded-2xl bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950 font-semibold text-center text-sm">Desafio NATHNUTRI 6.0</a><a href="https://pay.kiwify.com.br/K5f7UxX?afid=MWmhG5b4" target="_blank" class="block w-full py-3.5 px-4 rounded-2xl bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950 font-semibold text-center text-sm">Treinamento Funcional</a></div>`
-                },
-                { id: 'trabalho', emoji: "03", texto: "Trabalho" },
-                { id: 'contato', emoji: "04", texto: "Contato" }
             ]
         };
 
         let perfil = JSON.parse(JSON.stringify(defaultPerfil));
-        let esperandoChaveAPI = false;
         let longPressTimer = null;
-        let adminLinksTemp = []; // cópia temporária dos links no admin
+        let adminLinksTemp = [];
+        let temaSelecionado = "gold";
 
         // ======================================================
-        // DARK MODE
+        // TEMA
         // ======================================================
+        function aplicarTema(tema) {
+            document.documentElement.classList.remove('theme-gold','theme-sky','theme-emerald','theme-violet','theme-rose','theme-ink');
+            document.documentElement.classList.add('theme-' + (tema || 'gold'));
+            temaSelecionado = tema || 'gold';
+            document.querySelectorAll('.tema-btn').forEach(btn => {
+                btn.classList.remove('border-ink-900', 'dark:border-white');
+                if (btn.dataset.tema === temaSelecionado) btn.classList.add('border-ink-900', 'dark:border-white');
+            });
+        }
+        function selecionarTema(tema) { aplicarTema(tema); }
+
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
@@ -446,7 +440,77 @@ Visual Content Creator`,
         }
 
         // ======================================================
-        // SINCRONIZAÇÃO TEMPO REAL
+        // BANNER
+        // ======================================================
+        function podeExibirBanner() {
+            const b = perfil.banner;
+            if (!b || !b.ativo) return false;
+
+            const max = parseInt(b.maxExibicoes, 10);
+            if (max === 0) return true; // sempre
+
+            const key = 'banner_views_' + PROFILE_ID;
+            const count = parseInt(localStorage.getItem(key) || '0', 10);
+            return count < max;
+        }
+
+        function registrarExibicaoBanner() {
+            const b = perfil.banner;
+            if (!b || parseInt(b.maxExibicoes, 10) === 0) return;
+            const key = 'banner_views_' + PROFILE_ID;
+            const count = parseInt(localStorage.getItem(key) || '0', 10);
+            localStorage.setItem(key, String(count + 1));
+        }
+
+        function mostrarBanner() {
+            const b = perfil.banner || {};
+            document.getElementById('banner-titulo').innerText = b.titulo || 'Novidade';
+            document.getElementById('banner-texto').innerText = b.texto || '';
+            document.getElementById('banner-botao').innerText = b.botaoTexto || 'Saiba mais';
+            document.getElementById('banner-botao').href = b.botaoUrl || '#';
+
+            const imgWrap = document.getElementById('banner-imagem-wrap');
+            const img = document.getElementById('banner-imagem');
+            if (b.imagem) {
+                img.src = b.imagem;
+                imgWrap.classList.remove('hidden');
+            } else {
+                imgWrap.classList.add('hidden');
+            }
+
+            document.getElementById('banner-modal').style.display = 'flex';
+            registrarExibicaoBanner();
+        }
+
+        function fecharBanner(e) {
+            if (e) e.stopPropagation();
+            document.getElementById('banner-modal').style.display = 'none';
+        }
+
+        function agendarBanner() {
+            if (!podeExibirBanner()) return;
+            const delay = (parseInt(perfil.banner?.delaySegundos, 10) || 1) * 1000;
+            setTimeout(mostrarBanner, delay);
+        }
+
+        function testarBanner() {
+            // lê valores atuais do form sem salvar
+            const temp = {
+                ativo: true,
+                titulo: document.getElementById('adm-banner-titulo').value || 'Novidade',
+                texto: document.getElementById('adm-banner-texto').value || '',
+                imagem: document.getElementById('adm-banner-imagem').value || '',
+                botaoTexto: document.getElementById('adm-banner-botao-texto').value || 'Saiba mais',
+                botaoUrl: document.getElementById('adm-banner-botao-url').value || '#'
+            };
+            const old = perfil.banner;
+            perfil.banner = temp;
+            mostrarBanner();
+            perfil.banner = old;
+        }
+
+        // ======================================================
+        // SINCRONIZAÇÃO
         // ======================================================
         function iniciarSincronizacaoTempoReal() {
             const ref = db.ref('profiles/' + PROFILE_ID);
@@ -459,20 +523,22 @@ Visual Content Creator`,
                         ...defaultPerfil,
                         ...data,
                         categorias: data.categorias || defaultPerfil.categorias,
-                        destaques: data.destaques || defaultPerfil.destaques
+                        banner: { ...defaultPerfil.banner, ...(data.banner || {}) },
+                        tema: data.tema || 'gold'
                     };
-                    console.log("✅ Perfil sincronizado");
                 } else {
-                    console.log("📄 Criando perfil padrão...");
                     ref.set(defaultPerfil);
                     perfil = JSON.parse(JSON.stringify(defaultPerfil));
                 }
 
+                aplicarTema(perfil.tema || 'gold');
                 renderizarPerfil();
                 document.getElementById("loading-overlay").style.display = "none";
+                agendarBanner();
             }, (error) => {
-                console.error("Erro RTDB:", error);
+                console.error(error);
                 perfil = JSON.parse(JSON.stringify(defaultPerfil));
+                aplicarTema('gold');
                 renderizarPerfil();
                 document.getElementById("loading-overlay").style.display = "none";
             });
@@ -484,9 +550,6 @@ Visual Content Creator`,
         function renderizarPerfil() {
             document.getElementById('display-name').innerText = perfil.nome || "Vagner Lauriuche";
             document.getElementById('username-handle').innerText = `@${perfil.usuario || "Vagner_lauriuche"}`;
-            document.getElementById('posts-count').innerText = perfil.posts || "0";
-            document.getElementById('followers-count').innerText = perfil.seguidores || "0";
-            document.getElementById('following-count').innerText = perfil.seguindo || "0";
             document.getElementById('bio-text').innerText = perfil.bio || "";
 
             const fallback = "https://api.dicebear.com/9.x/avataaars/svg?seed=Vagner";
@@ -495,7 +558,6 @@ Visual Content Creator`,
             img.src = perfil.imagem || fallback;
             document.title = perfil.nome || "Vagner Lauriuche";
 
-            // Links
             const wrapper = document.getElementById('links-wrapper');
             wrapper.innerHTML = '';
 
@@ -506,15 +568,10 @@ Visual Content Creator`,
                         <div class="space-y-2.5">
                 `;
                 (cat.links || []).forEach(link => {
-                    const isModal = !!link.modalId;
-                    const href = isModal ? 'javascript:void(0)' : (link.url || '#');
-                    const onclick = isModal
-                        ? `onclick="abrirModalPorId('${link.modalId}')"`
-                        : `onclick="registrarClique('${link.titulo}', '${link.url}')"`;
-                    const target = isModal ? '' : 'target="_blank"';
-
+                    const href = link.url || '#';
                     html += `
-                        <a href="${href}" ${target} ${onclick} class="neo-card flex items-center gap-4 p-4 cursor-pointer">
+                        <a href="\( {href}" target="_blank" onclick="registrarClique(' \){link.titulo}', '${link.url}')"
+                           class="neo-card flex items-center gap-4 p-4 cursor-pointer">
                             <div class="w-11 h-11 ${link.bgIcone || 'bg-gray-800'} ${link.corIcone || 'text-white'} rounded-xl flex items-center justify-center text-lg flex-shrink-0">
                                 <i class="${link.icone || 'fas fa-link'}"></i>
                             </div>
@@ -529,168 +586,19 @@ Visual Content Creator`,
                 html += `</div></div>`;
                 wrapper.innerHTML += html;
             });
-
-            // Destaques
-            const container = document.getElementById('highlights-container');
-            container.innerHTML = '';
-            (perfil.destaques || []).forEach(d => {
-                const el = document.createElement('button');
-                el.className = "flex-shrink-0 px-5 h-10 rounded-full neo-card text-[13px] font-medium text-ink-700 dark:text-ink-200 flex items-center gap-2 active:scale-95 transition";
-                el.onclick = () => abrirModal(d);
-                el.innerHTML = `<span class="text-gold-500 font-bold text-xs">${d.emoji || ''}</span> ${d.texto || ''}`;
-                container.appendChild(el);
-            });
         }
 
-        // ======================================================
-        // ANALYTICS (somente cliques)
-        // ======================================================
         async function registrarClique(titulo, url) {
             try {
                 await db.ref('link_clicks').push({
                     profileId: PROFILE_ID,
                     linkTitle: titulo,
-                    url: url,
+                    url,
                     timestamp: firebase.database.ServerValue.TIMESTAMP,
                     userAgent: navigator.userAgent
                 });
-            } catch (e) {
-                console.warn("Erro clique:", e);
-            }
+            } catch (e) {}
         }
-
-        // ======================================================
-        // MODAIS
-        // ======================================================
-        function abrirModalPorId(id) {
-            if (id === 'chat-ai') return abrirModal({ id: 'chat-ai', texto: 'Assistente' });
-            const d = (perfil.destaques || []).find(x => x.id === id);
-            if (d) abrirModal(d);
-        }
-
-        function abrirDM() {
-            const modal = document.getElementById('story-modal');
-            document.getElementById('modal-icon-container').innerHTML = `<img src="${perfil.imagem || ''}" class="w-full h-full object-cover" onerror="this.src='https://api.dicebear.com/9.x/avataaars/svg?seed=Vagner'">`;
-            document.getElementById('modal-title').innerText = "Mensagem";
-            document.getElementById('modal-body-container').classList.add('hidden');
-            document.getElementById('chat-interface').classList.add('hidden');
-            document.getElementById('dm-interface').classList.remove('hidden');
-            document.getElementById('dm-interface').classList.add('flex');
-            modal.style.display = 'flex';
-        }
-
-        function enviarDMWhatsApp() {
-            const text = document.getElementById('dm-text').value;
-            const phone = perfil.whatsapp || "5511999999999";
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
-            fecharModal();
-        }
-
-        function abrirModal(destaque) {
-            const modal = document.getElementById('story-modal');
-            document.getElementById('modal-icon-container').innerHTML = `<img src="${perfil.imagem || ''}" class="w-full h-full object-cover" onerror="this.src='https://api.dicebear.com/9.x/avataaars/svg?seed=Vagner'">`;
-            document.getElementById('modal-body-container').classList.remove('hidden');
-            document.getElementById('chat-interface').classList.add('hidden');
-            document.getElementById('dm-interface').classList.add('hidden');
-
-            if (destaque.id === 'chat-ai') {
-                document.getElementById('modal-body-container').classList.add('hidden');
-                document.getElementById('chat-interface').classList.remove('hidden');
-                document.getElementById('chat-interface').classList.add('flex');
-                document.getElementById('modal-title').innerText = "Assistente";
-                verificarChaveAPI();
-            } else {
-                document.getElementById('modal-title').innerText = destaque.texto || "Detalhes";
-                document.getElementById('modal-body').innerHTML = destaque.conteudo || `<p class="text-ink-400 text-center italic">Conteúdo em breve.</p>`;
-            }
-            modal.style.display = 'flex';
-        }
-
-        function fecharModal(e) {
-            if (e) e.stopPropagation();
-            document.getElementById('story-modal').style.display = 'none';
-        }
-
-        // ======================================================
-        // CHAT
-        // ======================================================
-        const apiKey = "";
-        function getAPIKey() { return apiKey || localStorage.getItem('gemini_api_key'); }
-
-        function verificarChaveAPI() {
-            if (!getAPIKey()) {
-                adicionarBalao("Cole sua Google Gemini API Key nesta conversa.", 'system');
-                esperandoChaveAPI = true;
-            } else {
-                esperandoChaveAPI = false;
-            }
-        }
-
-        async function processarEnvio() {
-            const input = document.getElementById('chat-input');
-            const msg = input.value.trim();
-            if (!msg) return;
-
-            adicionarBalao(msg, 'user');
-            input.value = '';
-
-            if (esperandoChaveAPI) {
-                if (msg.length > 20) {
-                    localStorage.setItem('gemini_api_key', msg);
-                    esperandoChaveAPI = false;
-                    adicionarBalao("Chave salva com sucesso.", 'system');
-                    adicionarBalao("Pode perguntar sobre o Vagner.", 'ai');
-                } else {
-                    adicionarBalao("Chave inválida.", 'system');
-                }
-                return;
-            }
-
-            document.getElementById('typing-indicator').classList.remove('hidden');
-            const resposta = await chamarGemini(msg);
-            document.getElementById('typing-indicator').classList.add('hidden');
-            adicionarBalao(resposta, 'ai');
-        }
-
-        async function chamarGemini(prompt) {
-            const key = getAPIKey();
-            if (!key) return "Chave não configurada.";
-
-            const systemPrompt = `Você é o assistente oficial de Vagner Lauriuche. Responda de forma curta, elegante e profissional (máximo 3 frases). Tom sóbrio e confiante. Dados: Bacharel Zootecnia, MBA Agronegócios, MBA Indústria/Produto/Inovação, Administração. Visual Content Creator. Cursos: Fórmula Youtube Viral, Hype AI, Desafio NATHNUTRI, Treinamento Funcional.`;
-
-            try {
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ role: "user", parts: [{ text: prompt }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
-                    })
-                });
-                if (!res.ok) {
-                    if (res.status === 400 || res.status === 403) {
-                        localStorage.removeItem('gemini_api_key');
-                        esperandoChaveAPI = true;
-                        return "Chave inválida. Envie uma nova.";
-                    }
-                    throw new Error();
-                }
-                const data = await res.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Não entendi.";
-            } catch (e) {
-                return "Erro de conexão com a IA.";
-            }
-        }
-
-        function adicionarBalao(texto, tipo) {
-            const div = document.createElement('div');
-            div.className = `chat-bubble ${tipo}`;
-            div.innerText = texto;
-            document.getElementById('chat-messages').appendChild(div);
-            document.getElementById('chat-messages').scrollTop = 99999;
-        }
-
-        function handleEnter(e) { if (e.key === 'Enter') processarEnvio(); }
 
         // ======================================================
         // ADMIN
@@ -701,7 +609,6 @@ Visual Content Creator`,
             document.getElementById('admin-content').classList.add('hidden');
             document.getElementById('admin-password').value = '';
         }
-
         function fecharAdmin() {
             document.getElementById('admin-modal').style.display = 'none';
         }
@@ -718,51 +625,53 @@ Visual Content Creator`,
         }
 
         function mostrarAbaAdmin(aba) {
-            document.getElementById('aba-perfil').classList.add('hidden');
-            document.getElementById('aba-links').classList.add('hidden');
-            document.getElementById('tab-perfil').className = "flex-1 h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300";
-            document.getElementById('tab-links').className = "flex-1 h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300";
+            ['perfil','links','banner','tema'].forEach(a => {
+                document.getElementById('aba-' + a).classList.add('hidden');
+                const tab = document.getElementById('tab-' + a);
+                tab.className = "flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300";
+            });
+            document.getElementById('aba-' + aba).classList.remove('hidden');
+            document.getElementById('tab-' + aba).className = "flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold accent-btn";
 
-            if (aba === 'perfil') {
-                document.getElementById('aba-perfil').classList.remove('hidden');
-                document.getElementById('tab-perfil').className = "flex-1 h-10 rounded-xl text-sm font-semibold bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950";
-            } else {
-                document.getElementById('aba-links').classList.remove('hidden');
-                document.getElementById('tab-links').className = "flex-1 h-10 rounded-xl text-sm font-semibold bg-ink-950 dark:bg-gold-500 text-white dark:text-ink-950";
-                renderizarLinksAdmin();
-            }
+            if (aba === 'links') renderizarLinksAdmin();
+            if (aba === 'tema') aplicarTema(temaSelecionado);
         }
 
         function preencherFormAdmin() {
             document.getElementById('adm-username').value = perfil.usuario || '';
             document.getElementById('adm-displayname').value = perfil.nome || '';
             document.getElementById('adm-bio').value = perfil.bio || '';
-            document.getElementById('adm-posts').value = perfil.posts || '';
-            document.getElementById('adm-followers').value = perfil.seguidores || '';
-            document.getElementById('adm-following').value = perfil.seguindo || '';
             document.getElementById('adm-avatar').value = perfil.imagem || '';
             document.getElementById('adm-whatsapp').value = perfil.whatsapp || '';
 
-            // Cópia dos links para edição
+            const b = perfil.banner || defaultPerfil.banner;
+            document.getElementById('adm-banner-ativo').checked = !!b.ativo;
+            document.getElementById('adm-banner-titulo').value = b.titulo || '';
+            document.getElementById('adm-banner-texto').value = b.texto || '';
+            document.getElementById('adm-banner-imagem').value = b.imagem || '';
+            document.getElementById('adm-banner-botao-texto').value = b.botaoTexto || '';
+            document.getElementById('adm-banner-botao-url').value = b.botaoUrl || '';
+            document.getElementById('adm-banner-delay').value = b.delaySegundos ?? 1;
+            document.getElementById('adm-banner-max').value = b.maxExibicoes ?? 3;
+
             adminLinksTemp = JSON.parse(JSON.stringify(perfil.categorias || []));
+            temaSelecionado = perfil.tema || 'gold';
+            aplicarTema(temaSelecionado);
         }
 
-        // ---------- Gerenciamento de Links ----------
         function renderizarLinksAdmin() {
             const container = document.getElementById('admin-links-list');
             container.innerHTML = '';
 
             adminLinksTemp.forEach((cat, catIndex) => {
-                // Título da categoria
                 const catHeader = document.createElement('div');
                 catHeader.className = "flex items-center gap-2 mb-2 mt-3";
                 catHeader.innerHTML = `
-                    <input value="${cat.titulo}" onchange="adminLinksTemp[${catIndex}].titulo = this.value"
+                    <input value="\( {cat.titulo}" onchange="adminLinksTemp[ \){catIndex}].titulo = this.value"
                            class="flex-1 h-9 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm font-semibold outline-none">
                     <button onclick="removerCategoria(${catIndex})" class="w-8 h-8 rounded-lg bg-red-500/10 text-red-500 flex items-center justify-center">
                         <i class="fas fa-trash text-xs"></i>
-                    </button>
-                `;
+                    </button>`;
                 container.appendChild(catHeader);
 
                 (cat.links || []).forEach((link, linkIndex) => {
@@ -771,51 +680,37 @@ Visual Content Creator`,
                     div.innerHTML = `
                         <div class="flex justify-between items-start mb-2">
                             <span class="text-[10px] text-ink-400 font-medium">Link ${linkIndex + 1}</span>
-                            <button onclick="removerLink(${catIndex}, ${linkIndex})" class="text-red-500 text-xs">
-                                <i class="fas fa-times"></i>
-                            </button>
+                            <button onclick="removerLink(${catIndex}, ${linkIndex})" class="text-red-500 text-xs"><i class="fas fa-times"></i></button>
                         </div>
-                        <input placeholder="Título" value="${link.titulo || ''}" 
-                               onchange="adminLinksTemp[${catIndex}].links[${linkIndex}].titulo = this.value"
+                        <input placeholder="Título" value="\( {link.titulo || ''}" onchange="adminLinksTemp[ \){catIndex}].links[${linkIndex}].titulo = this.value"
                                class="w-full h-9 mb-1.5 bg-white dark:bg-ink-950 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm outline-none">
-                        <input placeholder="Subtítulo" value="${link.subtitulo || ''}" 
-                               onchange="adminLinksTemp[${catIndex}].links[${linkIndex}].subtitulo = this.value"
+                        <input placeholder="Subtítulo" value="\( {link.subtitulo || ''}" onchange="adminLinksTemp[ \){catIndex}].links[${linkIndex}].subtitulo = this.value"
                                class="w-full h-9 mb-1.5 bg-white dark:bg-ink-950 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm outline-none">
-                        <input placeholder="URL" value="${link.url || ''}" 
-                               onchange="adminLinksTemp[${catIndex}].links[${linkIndex}].url = this.value"
+                        <input placeholder="URL" value="\( {link.url || ''}" onchange="adminLinksTemp[ \){catIndex}].links[${linkIndex}].url = this.value"
                                class="w-full h-9 mb-1.5 bg-white dark:bg-ink-950 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm outline-none">
-                        <input placeholder="Ícone (ex: fab fa-whatsapp)" value="${link.icone || ''}" 
-                               onchange="adminLinksTemp[${catIndex}].links[${linkIndex}].icone = this.value"
+                        <input placeholder="Ícone (fab fa-whatsapp)" value="\( {link.icone || ''}" onchange="adminLinksTemp[ \){catIndex}].links[${linkIndex}].icone = this.value"
                                class="w-full h-9 bg-white dark:bg-ink-950 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm outline-none">
                     `;
                     container.appendChild(div);
                 });
 
-                // Botão adicionar link na categoria
                 const addBtn = document.createElement('button');
                 addBtn.className = "w-full h-9 rounded-lg border border-dashed border-ink-300 dark:border-ink-700 text-xs text-ink-500 mb-4";
-                addBtn.innerHTML = `<i class="fas fa-plus mr-1"></i> Adicionar link nesta categoria`;
+                addBtn.innerHTML = `<i class="fas fa-plus mr-1"></i> Adicionar link`;
                 addBtn.onclick = () => adicionarLinkNaCategoria(catIndex);
                 container.appendChild(addBtn);
             });
         }
 
         function adicionarNovoLink() {
-            // Cria nova categoria se não existir nenhuma, ou adiciona na última
             if (adminLinksTemp.length === 0) {
                 adminLinksTemp.push({
                     titulo: "Nova Categoria",
                     links: [{ titulo: "Novo Link", subtitulo: "", url: "https://", icone: "fas fa-link", corIcone: "text-white", bgIcone: "bg-gray-800" }]
                 });
             } else {
-                const last = adminLinksTemp[adminLinksTemp.length - 1];
-                last.links.push({
-                    titulo: "Novo Link",
-                    subtitulo: "",
-                    url: "https://",
-                    icone: "fas fa-link",
-                    corIcone: "text-white",
-                    bgIcone: "bg-gray-800"
+                adminLinksTemp[adminLinksTemp.length - 1].links.push({
+                    titulo: "Novo Link", subtitulo: "", url: "https://", icone: "fas fa-link", corIcone: "text-white", bgIcone: "bg-gray-800"
                 });
             }
             renderizarLinksAdmin();
@@ -823,32 +718,24 @@ Visual Content Creator`,
 
         function adicionarLinkNaCategoria(catIndex) {
             adminLinksTemp[catIndex].links.push({
-                titulo: "Novo Link",
-                subtitulo: "",
-                url: "https://",
-                icone: "fas fa-link",
-                corIcone: "text-white",
-                bgIcone: "bg-gray-800"
+                titulo: "Novo Link", subtitulo: "", url: "https://", icone: "fas fa-link", corIcone: "text-white", bgIcone: "bg-gray-800"
             });
             renderizarLinksAdmin();
         }
 
         function removerLink(catIndex, linkIndex) {
             adminLinksTemp[catIndex].links.splice(linkIndex, 1);
-            if (adminLinksTemp[catIndex].links.length === 0) {
-                adminLinksTemp.splice(catIndex, 1);
-            }
+            if (adminLinksTemp[catIndex].links.length === 0) adminLinksTemp.splice(catIndex, 1);
             renderizarLinksAdmin();
         }
 
         function removerCategoria(catIndex) {
-            if (confirm("Remover esta categoria e todos os links dela?")) {
+            if (confirm("Remover esta categoria?")) {
                 adminLinksTemp.splice(catIndex, 1);
                 renderizarLinksAdmin();
             }
         }
 
-        // ---------- Salvar ----------
         async function salvarPerfilAdmin() {
             const btn = document.getElementById('btn-salvar');
             btn.innerText = "Salvando...";
@@ -858,19 +745,25 @@ Visual Content Creator`,
                 usuario: document.getElementById('adm-username').value.trim(),
                 nome: document.getElementById('adm-displayname').value.trim(),
                 bio: document.getElementById('adm-bio').value,
-                posts: document.getElementById('adm-posts').value.trim(),
-                seguidores: document.getElementById('adm-followers').value.trim(),
-                seguindo: document.getElementById('adm-following').value.trim(),
                 imagem: document.getElementById('adm-avatar').value.trim(),
                 whatsapp: document.getElementById('adm-whatsapp').value.trim(),
+                tema: temaSelecionado,
                 categorias: adminLinksTemp,
-                destaques: perfil.destaques || defaultPerfil.destaques,
+                banner: {
+                    ativo: document.getElementById('adm-banner-ativo').checked,
+                    titulo: document.getElementById('adm-banner-titulo').value.trim(),
+                    texto: document.getElementById('adm-banner-texto').value.trim(),
+                    imagem: document.getElementById('adm-banner-imagem').value.trim(),
+                    botaoTexto: document.getElementById('adm-banner-botao-texto').value.trim() || "Saiba mais",
+                    botaoUrl: document.getElementById('adm-banner-botao-url').value.trim() || "#",
+                    delaySegundos: parseInt(document.getElementById('adm-banner-delay').value, 10) || 1,
+                    maxExibicoes: parseInt(document.getElementById('adm-banner-max').value, 10) || 0
+                },
                 updatedAt: firebase.database.ServerValue.TIMESTAMP
             };
 
             try {
                 await db.ref('profiles/' + PROFILE_ID).update(novo);
-                console.log("✅ Salvo com sucesso");
                 alert("✅ Salvo com sucesso!");
                 fecharAdmin();
             } catch (error) {
@@ -882,17 +775,11 @@ Visual Content Creator`,
             }
         }
 
-        function iniciarLongPress() {
-            longPressTimer = setTimeout(abrirAdmin, 800);
-        }
-        function cancelarLongPress() {
-            clearTimeout(longPressTimer);
-        }
+        function iniciarLongPress() { longPressTimer = setTimeout(abrirAdmin, 800); }
+        function cancelarLongPress() { clearTimeout(longPressTimer); }
 
-        // ======================================================
-        // INIT
-        // ======================================================
         document.addEventListener('DOMContentLoaded', () => {
+            aplicarTema('gold');
             iniciarSincronizacaoTempoReal();
         });
     </script>
