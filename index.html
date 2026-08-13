@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Vagner Lauriuche</title>
+    <meta name="description" id="meta-desc" content="Bacharel em Zootecnia · MBA Agronegócios · Visual Content Creator">
+    <meta property="og:type" content="website">
+    <meta property="og:title" id="og-title" content="Vagner Lauriuche">
+    <meta property="og:description" id="og-desc" content="Bacharel em Zootecnia · MBA Agronegócios · Visual Content Creator">
+    <meta property="og:image" id="og-image" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" id="tw-title" content="Vagner Lauriuche">
+    <meta name="twitter:description" id="tw-desc" content="Bacharel em Zootecnia · MBA Agronegócios · Visual Content Creator">
+    <link rel="icon" id="favicon" href="https://api.dicebear.com/9.x/avataaars/svg?seed=Vagner">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
 
@@ -24,764 +32,1100 @@
                     },
                     colors: {
                         ink: {
-                            50: '#f7f7f7', 100: '#e3e3e3', 200: '#c8c8c8', 300: '#a4a4a4',
-                            400: '#818181', 500: '#666666', 600: '#515151', 700: '#434343',
-                            800: '#383838', 900: '#1a1a1a', 950: '#0d0d0d',
+                            50:'#f7f7f7',100:'#e3e3e3',200:'#c8c8c8',300:'#a4a4a4',
+                            400:'#818181',500:'#666666',600:'#515151',700:'#434343',
+                            800:'#383838',900:'#1a1a1a',950:'#0d0d0d'
                         }
-                    },
-                    boxShadow: {
-                        'soft': '0 4px 24px -4px rgba(0,0,0,0.08)',
-                        'elevated': '0 12px 40px -12px rgba(0,0,0,0.15)',
                     }
                 }
             }
         }
     </script>
-
     <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            margin: 0; padding: 0; overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-        .main-wrap {
-            width: 100%; max-width: 460px; margin: 0 auto;
-            min-height: 100vh; position: relative;
-        }
-        .neo-card {
-            background: #ffffff; border-radius: 20px;
-            box-shadow: 6px 6px 18px rgba(0,0,0,0.05), -6px -6px 18px rgba(255,255,255,0.9);
-            border: 1px solid rgba(0,0,0,0.03);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .dark .neo-card {
-            background: #161616;
-            box-shadow: 6px 6px 20px rgba(0,0,0,0.35), -4px -4px 12px rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .neo-card:active { transform: scale(0.985); }
-
-        .modal-overlay {
-            position: fixed; inset: 0;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            z-index: 100;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .modal-sheet {
-            background: #fff; width: 100%; max-width: 400px;
-            border-radius: 24px; max-height: 90vh;
-            overflow: hidden; display: flex; flex-direction: column;
-            animation: rise 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        }
-        .dark .modal-sheet { background: #111; }
-
-        @keyframes rise {
-            from { transform: translateY(40px) scale(0.96); opacity: 0; }
-            to { transform: translateY(0) scale(1); opacity: 1; }
-        }
-
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-
-        .loading-screen {
-            position: fixed; inset: 0; background: #fafafa; z-index: 9999;
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column; gap: 20px;
-        }
-        .dark .loading-screen { background: #0d0d0d; }
-
-        .admin-link-item {
-            background: #f8f8f8; border-radius: 14px; padding: 12px; margin-bottom: 10px;
-        }
-        .dark .admin-link-item { background: #1a1a1a; }
-
-        :root { --accent: #c9a227; }
-        .theme-gold { --accent: #c9a227; }
-        .theme-sky { --accent: #0ea5e9; }
-        .theme-emerald { --accent: #10b981; }
-        .theme-violet { --accent: #8b5cf6; }
-        .theme-rose { --accent: #f43f5e; }
-        .theme-ink { --accent: #1a1a1a; }
-
-        .accent-bg { background-color: var(--accent) !important; }
-        .accent-text { color: var(--accent) !important; }
-        .accent-dot { background-color: var(--accent) !important; }
-        .accent-btn {
-            background-color: var(--accent) !important;
-            color: #fff !important;
-        }
-        .dark .theme-ink .accent-btn { color: #0d0d0d !important; }
-        .dark .accent-btn { color: #0d0d0d !important; }
-        .theme-ink .accent-btn { color: #fff !important; }
+        *{box-sizing:border-box}
+        body{font-family:Inter,system-ui,sans-serif;margin:0;padding:0;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        .main-wrap{width:100%;max-width:460px;margin:0 auto;min-height:100vh;position:relative}
+        .neo-card{background:#fff;border-radius:20px;box-shadow:6px 6px 18px rgba(0,0,0,.05),-6px -6px 18px rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.03);transition:all .25s cubic-bezier(.4,0,.2,1)}
+        .dark .neo-card{background:#161616;box-shadow:6px 6px 20px rgba(0,0,0,.35),-4px -4px 12px rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04)}
+        .neo-card:active{transform:scale(.985)}
+        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+        .modal-sheet{background:#fff;width:100%;max-width:400px;border-radius:24px;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;animation:rise .4s cubic-bezier(.16,1,.3,1);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+        .dark .modal-sheet{background:#111}
+        @keyframes rise{from{transform:translateY(40px) scale(.96);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+        .loading-screen{position:fixed;inset:0;background:#fafafa;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}
+        .dark .loading-screen{background:#0d0d0d}
+        .admin-link-item{background:#f8f8f8;border-radius:14px;padding:12px;margin-bottom:10px}
+        .dark .admin-link-item{background:#1a1a1a}
+        .input-admin{width:100%;height:36px;margin-bottom:6px;background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:0 12px;font-size:13px;outline:none}
+        .dark .input-admin{background:#0a0a0a;border-color:#333;color:#eee}
+        .drag-handle{cursor:grab;color:#999;padding:4px 8px}
+        .drag-handle:active{cursor:grabbing}
+        .dragging{opacity:.5}
+        .drag-over{outline:2px dashed var(--accent);outline-offset:2px}
+        :root{--accent:#c9a227}
+        .theme-gold{--accent:#c9a227}
+        .theme-sky{--accent:#0ea5e9}
+        .theme-emerald{--accent:#10b981}
+        .theme-violet{--accent:#8b5cf6}
+        .theme-rose{--accent:#f43f5e}
+        .theme-ink{--accent:#1a1a1a}
+        .theme-ocean{--accent:#06b6d4}
+        .theme-sunset{--accent:#f97316}
+        .accent-bg{background-color:var(--accent)!important}
+        .accent-text{color:var(--accent)!important}
+        .accent-dot{background-color:var(--accent)!important}
+        .accent-btn{background-color:var(--accent)!important;color:#fff!important}
+        .dark .accent-btn{color:#0d0d0d!important}
+        .theme-ink .accent-btn{color:#fff!important}
+        .icon-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-height:200px;overflow-y:auto}
+        .icon-grid button{height:40px;border-radius:10px;border:1px solid #e5e5e5;background:#fff;font-size:16px}
+        .dark .icon-grid button{background:#1a1a1a;border-color:#333;color:#eee}
+        .icon-grid button.selected{border-color:var(--accent)}
+        .stat-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06)}
+        .dark .stat-row{border-bottom-color:rgba(255,255,255,.06)}
+        .categoria{text-align: center;}
     </style>
 </head>
 <body class="bg-[#f5f5f5] dark:bg-[#0d0d0d] text-ink-900 dark:text-ink-100 transition-colors duration-300">
 
-    <div id="loading-overlay" class="loading-screen">
-        <div class="w-10 h-10 border-2 border-ink-200 dark:border-ink-700 rounded-full animate-spin" style="border-top-color: var(--accent)"></div>
-        <p class="text-xs tracking-[0.2em] uppercase text-ink-400 font-medium">Vagner Lauriuche</p>
-    </div>
+<div id="loading-overlay" class="loading-screen">
+    <div class="w-10 h-10 border-2 border-ink-200 dark:border-ink-700 rounded-full animate-spin" style="border-top-color:var(--accent)"></div>
+    <p class="text-xs tracking-[0.2em] uppercase text-ink-400 font-medium">Vagner Lauriuche</p>
+</div>
 
-    <div class="main-wrap bg-[#fafafa] dark:bg-[#111] min-h-screen">
-
-        <div class="sticky top-0 z-40 px-6 h-14 flex items-center justify-between bg-[#fafafa]/80 dark:bg-[#111]/80 backdrop-blur-xl">
-            <div class="flex items-center gap-2">
-                <div class="w-1.5 h-1.5 rounded-full accent-dot"></div>
-                <span class="text-[11px] tracking-[0.18em] uppercase font-semibold text-ink-500 dark:text-ink-400">Official</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <button onclick="toggleDarkMode()" class="w-9 h-9 rounded-full flex items-center justify-center text-ink-500 hover:text-ink-900 dark:hover:text-white transition">
-                    <i class="fas fa-moon dark:hidden text-sm"></i>
-                    <i class="fas fa-sun hidden dark:block text-sm"></i>
-                </button>
-                <button onclick="abrirAdmin()" class="w-9 h-9 rounded-full flex items-center justify-center text-ink-500 hover:text-ink-900 dark:hover:text-white transition">
-                    <i class="fas fa-ellipsis text-sm"></i>
-                </button>
-            </div>
+<div class="main-wrap bg-[#fafafa] dark:bg-[#111] min-h-screen">
+    <div class="sticky top-0 z-40 px-6 h-14 flex items-center justify-between bg-[#fafafa]/80 dark:bg-[#111]/80 backdrop-blur-xl">
+        <div class="flex items-center gap-2">
+            <div class="w-1.5 h-1.5 rounded-full accent-dot"></div>
+            <span class="text-[11px] tracking-[0.18em] uppercase font-semibold text-ink-500 dark:text-ink-400">Official</span>
         </div>
-
-        <div class="px-6 pt-6 pb-10">
-            <div class="flex justify-center mb-7">
-                <div class="relative cursor-pointer"
-                     oncontextmenu="abrirAdmin(); return false;"
-                     ontouchstart="iniciarLongPress()" ontouchend="cancelarLongPress()" ontouchmove="cancelarLongPress()">
-                    <div class="w-[128px] h-[128px] rounded-full overflow-hidden shadow-elevated ring-1 ring-black/5 dark:ring-white/10">
-                        <img id="profile-img" src="" alt="Vagner Lauriuche" class="w-full h-full object-cover">
-                    </div>
-                    <div class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full accent-bg flex items-center justify-center shadow-soft">
-                        <i class="fas fa-check text-white text-[10px]"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mb-5">
-                <h1 class="font-display text-[32px] leading-tight font-bold tracking-tight text-ink-950 dark:text-white mb-1" id="display-name">Vagner Lauriuche</h1>
-                <p class="text-sm text-ink-400 dark:text-ink-500 font-medium tracking-wide" id="username-handle">@Vagner_lauriuche</p>
-            </div>
-
-            <p class="text-center text-[14.5px] leading-relaxed text-ink-600 dark:text-ink-300 max-w-[340px] mx-auto whitespace-pre-line mb-10" id="bio-text"></p>
-
-            <div class="space-y-8" id="links-wrapper"></div>
-
-            <div class="mt-16 mb-8 text-center">
-                <div class="w-8 h-px bg-ink-200 dark:bg-ink-800 mx-auto mb-4"></div>
-                <p class="text-[11px] tracking-[0.2em] uppercase text-ink-400 dark:text-ink-600 font-medium">Vagner Lauriuche</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== BANNER DE DIVULGAÇÃO ==================== -->
-    <div id="banner-modal" class="modal-overlay" style="display:none;" onclick="fecharBanner(event)">
-        <div class="modal-sheet" onclick="event.stopPropagation()">
-            <button onclick="fecharBanner()" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center">
-                <i class="fas fa-times text-sm"></i>
+        <div class="flex items-center gap-3">
+            <button type="button" onclick="toggleDarkMode()" class="w-9 h-9 rounded-full flex items-center justify-center text-ink-500 hover:text-ink-900 dark:hover:text-white transition">
+                <i class="fas fa-moon dark:hidden text-sm"></i>
+                <i class="fas fa-sun hidden dark:block text-sm"></i>
             </button>
-
-            <div id="banner-imagem-wrap" class="hidden w-full h-44 overflow-hidden bg-ink-100 dark:bg-ink-900">
-                <img id="banner-imagem" src="" class="w-full h-full object-cover" alt="">
-            </div>
-
-            <div class="p-6 text-center">
-                <h3 class="font-display text-xl font-bold mb-2" id="banner-titulo">Título</h3>
-                <p class="text-sm text-ink-500 dark:text-ink-400 leading-relaxed mb-6" id="banner-texto">Texto do banner</p>
-                <a id="banner-botao" href="#" target="_blank"
-                   class="block w-full h-12 rounded-2xl accent-btn font-semibold text-sm flex items-center justify-center active:scale-[0.98] transition">
-                    Saiba mais
-                </a>
-            </div>
+            <button type="button" onclick="abrirAdmin()" class="w-9 h-9 rounded-full flex items-center justify-center text-ink-500 hover:text-ink-900 dark:hover:text-white transition">
+                <i class="fas fa-ellipsis text-sm"></i>
+            </button>
         </div>
     </div>
 
-    <!-- ==================== ADMIN ==================== -->
-    <div id="admin-modal" class="modal-overlay" style="display:none;" onclick="fecharAdmin()">
-        <div class="modal-sheet" onclick="event.stopPropagation()" style="max-height:92vh;">
-            <div class="p-6 overflow-y-auto max-h-[92vh]">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="font-display text-xl font-bold">Admin</h3>
-                    <button onclick="fecharAdmin()" class="w-9 h-9 rounded-full bg-ink-100 dark:bg-ink-800 flex items-center justify-center">
-                        <i class="fas fa-times text-sm"></i>
-                    </button>
+    <div class="px-6 pt-6 pb-10">
+        <div class="flex justify-center mb-7">
+            <div class="relative cursor-pointer"
+                 oncontextmenu="abrirAdmin();return false;"
+                 ontouchstart="iniciarLongPress()" ontouchend="cancelarLongPress()" ontouchmove="cancelarLongPress()">
+                <div class="w-[128px] h-[128px] rounded-full overflow-hidden ring-1 ring-black/5 dark:ring-white/10" style="box-shadow:0 12px 40px -12px rgba(0,0,0,.15)">
+                    <img id="profile-img" src="" alt="Vagner Lauriuche" class="w-full h-full object-cover">
                 </div>
-
-                <div id="admin-login">
-                    <p class="text-sm text-ink-500 mb-4">Acesso restrito</p>
-                    <input type="password" id="admin-password" placeholder="Senha"
-                           class="w-full h-12 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-2xl px-4 mb-3 outline-none">
-                    <button onclick="verificarSenhaAdmin()" class="w-full h-12 rounded-2xl accent-btn font-semibold">Entrar</button>
-                    <p class="text-xs text-center text-ink-400 mt-4">Altere ADMIN_PASSWORD no código</p>
-                </div>
-
-                <div id="admin-content" class="hidden space-y-5">
-
-                    <div class="flex gap-2 mb-2 flex-wrap">
-                        <button onclick="mostrarAbaAdmin('perfil')" id="tab-perfil" class="flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold accent-btn">Perfil</button>
-                        <button onclick="mostrarAbaAdmin('links')" id="tab-links" class="flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Links</button>
-                        <button onclick="mostrarAbaAdmin('banner')" id="tab-banner" class="flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Banner</button>
-                        <button onclick="mostrarAbaAdmin('tema')" id="tab-tema" class="flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Tema</button>
-                    </div>
-
-                    <!-- PERFIL -->
-                    <div id="aba-perfil" class="space-y-4">
-                        <div>
-                            <label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Usuário</label>
-                            <input id="adm-username" class="w-full h-11 mt-1.5 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none">
-                        </div>
-                        <div>
-                            <label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Nome</label>
-                            <input id="adm-displayname" class="w-full h-11 mt-1.5 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none">
-                        </div>
-                        <div>
-                            <label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Bio</label>
-                            <textarea id="adm-bio" rows="4" class="w-full mt-1.5 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 py-2.5 text-sm outline-none"></textarea>
-                        </div>
-                        <div>
-                            <label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Foto de perfil (URL)</label>
-                            <input id="adm-avatar" placeholder="https://..." class="w-full h-11 mt-1.5 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none">
-                            <p class="text-[10px] text-ink-400 mt-1">Cole o link direto da imagem (PNG, JPG ou WebP)</p>
-                        </div>
-                        <div>
-                            <label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">WhatsApp</label>
-                            <input id="adm-whatsapp" class="w-full h-11 mt-1.5 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" placeholder="5511999999999">
-                        </div>
-                    </div>
-
-                    <!-- LINKS -->
-                    <div id="aba-links" class="hidden space-y-4">
-                        <div class="flex items-center justify-between">
-                            <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Gerenciar Links</p>
-                            <button onclick="adicionarNovoLink()" class="text-xs font-semibold accent-text flex items-center gap-1">
-                                <i class="fas fa-plus"></i> Novo
-                            </button>
-                        </div>
-                        <div id="admin-links-list" class="space-y-3 max-h-[48vh] overflow-y-auto pr-1"></div>
-                    </div>
-
-                    <!-- BANNER -->
-                    <div id="aba-banner" class="hidden space-y-4">
-                        <div class="flex items-center justify-between">
-                            <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Banner de divulgação</p>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <span class="text-xs text-ink-500">Ativo</span>
-                                <input type="checkbox" id="adm-banner-ativo" class="w-5 h-5 rounded accent-color">
-                            </label>
-                        </div>
-
-                        <div>
-                            <label class="text-[11px] text-ink-400 font-semibold">Título</label>
-                            <input id="adm-banner-titulo" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none">
-                        </div>
-                        <div>
-                            <label class="text-[11px] text-ink-400 font-semibold">Texto</label>
-                            <textarea id="adm-banner-texto" rows="3" class="w-full mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 py-2.5 text-sm outline-none"></textarea>
-                        </div>
-                        <div>
-                            <label class="text-[11px] text-ink-400 font-semibold">Imagem do banner (URL opcional)</label>
-                            <input id="adm-banner-imagem" placeholder="https://..." class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none">
-                        </div>
-                        <div>
-                            <label class="text-[11px] text-ink-400 font-semibold">Texto do botão</label>
-                            <input id="adm-banner-botao-texto" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" placeholder="Saiba mais">
-                        </div>
-                        <div>
-                            <label class="text-[11px] text-ink-400 font-semibold">Link do botão</label>
-                            <input id="adm-banner-botao-url" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" placeholder="https://...">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="text-[11px] text-ink-400 font-semibold">Delay (segundos)</label>
-                                <input type="number" id="adm-banner-delay" min="0" max="30" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" value="1">
-                            </div>
-                            <div>
-                                <label class="text-[11px] text-ink-400 font-semibold">Máx. exibições</label>
-                                <input type="number" id="adm-banner-max" min="0" max="99" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" value="3">
-                                <p class="text-[10px] text-ink-400 mt-1">0 = sempre mostrar</p>
-                            </div>
-                        </div>
-
-                        <button type="button" onclick="testarBanner()" class="w-full h-10 rounded-xl border border-ink-200 dark:border-ink-700 text-sm font-medium">
-                            Testar banner agora
-                        </button>
-                    </div>
-
-                    <!-- TEMA -->
-                    <div id="aba-tema" class="hidden space-y-4">
-                        <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Cor de destaque</p>
-                        <div class="grid grid-cols-3 gap-3">
-                            <button onclick="selecionarTema('gold')" data-tema="gold" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-[#c9a227]/15">
-                                <div class="w-6 h-6 rounded-full bg-[#c9a227]"></div>
-                                <span class="text-[10px] font-medium">Gold</span>
-                            </button>
-                            <button onclick="selecionarTema('sky')" data-tema="sky" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-[#0ea5e9]/15">
-                                <div class="w-6 h-6 rounded-full bg-[#0ea5e9]"></div>
-                                <span class="text-[10px] font-medium">Sky</span>
-                            </button>
-                            <button onclick="selecionarTema('emerald')" data-tema="emerald" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-[#10b981]/15">
-                                <div class="w-6 h-6 rounded-full bg-[#10b981]"></div>
-                                <span class="text-[10px] font-medium">Emerald</span>
-                            </button>
-                            <button onclick="selecionarTema('violet')" data-tema="violet" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-[#8b5cf6]/15">
-                                <div class="w-6 h-6 rounded-full bg-[#8b5cf6]"></div>
-                                <span class="text-[10px] font-medium">Violet</span>
-                            </button>
-                            <button onclick="selecionarTema('rose')" data-tema="rose" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-[#f43f5e]/15">
-                                <div class="w-6 h-6 rounded-full bg-[#f43f5e]"></div>
-                                <span class="text-[10px] font-medium">Rose</span>
-                            </button>
-                            <button onclick="selecionarTema('ink')" data-tema="ink" class="tema-btn h-14 rounded-2xl border-2 border-transparent flex flex-col items-center justify-center gap-1 bg-ink-900/10 dark:bg-white/10">
-                                <div class="w-6 h-6 rounded-full bg-ink-900 dark:bg-white"></div>
-                                <span class="text-[10px] font-medium">Ink</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <button onclick="salvarPerfilAdmin()" id="btn-salvar" class="w-full h-12 rounded-2xl accent-btn font-semibold mt-2">
-                        Salvar no Firebase
-                    </button>
+                <div class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full accent-bg flex items-center justify-center">
+                    <i class="fas fa-check text-white text-[10px]"></i>
                 </div>
             </div>
         </div>
+        <div class="text-center mb-5">
+            <h1 class="font-display text-[32px] leading-tight font-bold tracking-tight text-ink-950 dark:text-white mb-1" id="display-name">Vagner Lauriuche</h1>
+            <p class="text-sm text-ink-400 dark:text-ink-500 font-medium tracking-wide" id="username-handle">@Vagner_lauriuche</p>
+        </div>
+        <p class="text-center text-[14.5px] leading-relaxed text-ink-600 dark:text-ink-300 max-w-[340px] mx-auto whitespace-pre-line mb-10" id="bio-text"></p>
+        <div class="space-y-8" id="links-wrapper"></div>
+        <div class="mt-16 mb-8 text-center">
+            <div class="w-8 h-px bg-ink-200 dark:bg-ink-800 mx-auto mb-4"></div>
+            <p class="text-[11px] tracking-[0.2em] uppercase text-ink-400 dark:text-ink-600 font-medium">Vagner Lauriuche</p>
+        </div>
     </div>
+</div>
 
-    <script>
-        const ADMIN_PASSWORD = "admin123"; // ← altere a senha aqui
+<div id="banner-modal" class="modal-overlay" style="display:none" onclick="fecharBanner(event)">
+    <div class="modal-sheet" onclick="event.stopPropagation()">
+        <button type="button" onclick="fecharBanner()" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center"><i class="fas fa-times text-sm"></i></button>
+        <div id="banner-imagem-wrap" class="hidden w-full h-44 overflow-hidden bg-ink-100 dark:bg-ink-900">
+            <img id="banner-imagem" src="" class="w-full h-full object-cover" alt="">
+        </div>
+        <div class="p-6 text-center">
+            <h3 class="font-display text-xl font-bold mb-2" id="banner-titulo">Título</h3>
+            <p class="text-sm text-ink-500 dark:text-ink-400 leading-relaxed mb-6" id="banner-texto">Texto</p>
+            <a id="banner-botao" href="#" target="_blank" class="block w-full h-12 rounded-2xl accent-btn font-semibold text-sm flex items-center justify-center">Saiba mais</a>
+            <button type="button" onclick="naoMostrarBannerDeNovo()" class="mt-3 text-xs text-ink-400 underline">Não mostrar de novo</button>
+        </div>
+    </div>
+</div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBBOiQd-zuLsUei5Q7aDRWoN7r-e2l8LBQ",
-            authDomain: "minha-bio-434e1.firebaseapp.com",
-            projectId: "minha-bio-434e1",
-            storageBucket: "minha-bio-434e1.firebasestorage.app",
-            messagingSenderId: "964235041188",
-            appId: "1:964235041188:web:af7fe7d8c1540605c10931",
-            measurementId: "G-XEETGVKLLD",
-            databaseURL: "https://minha-bio-434e1-default-rtdb.firebaseio.com"
-        };
+<div id="icon-picker-modal" class="modal-overlay" style="display:none" onclick="fecharIconPicker(event)">
+    <div class="modal-sheet p-5" onclick="event.stopPropagation()">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold">Escolher ícone</h3>
+            <button type="button" onclick="fecharIconPicker()" class="w-8 h-8 rounded-full bg-ink-100 dark:bg-ink-800 flex items-center justify-center"><i class="fas fa-times text-xs"></i></button>
+        </div>
+        <div class="icon-grid" id="icon-grid"></div>
+    </div>
+</div>
 
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-        const PROFILE_ID = "vagner";
+<div id="qr-modal" class="modal-overlay" style="display:none" onclick="fecharQR(event)">
+    <div class="modal-sheet p-6 text-center" onclick="event.stopPropagation()">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold">QR Code da Bio</h3>
+            <button type="button" onclick="fecharQR()" class="w-8 h-8 rounded-full bg-ink-100 dark:bg-ink-800 flex items-center justify-center"><i class="fas fa-times text-xs"></i></button>
+        </div>
+        <img id="qr-img" src="" alt="QR" class="mx-auto rounded-xl bg-white p-3 w-52 h-52 object-contain">
+        <p class="text-xs text-ink-400 mt-3 break-all" id="qr-url"></p>
+        <a id="qr-download" download="bio-qr.png" class="mt-4 inline-block text-sm accent-text font-semibold">Baixar QR</a>
+    </div>
+</div>
 
-        const defaultPerfil = {
-            usuario: "Vagner_lauriuche",
-            nome: "Vagner Lauriuche",
-            imagem: "foto.png",
-            bio: `Bacharel em Zootecnia  ·  MBA Agronegócios
-MBA Indústria, Produto e Inovação  ·  Administração
-Visual Content Creator`,
-            whatsapp: "5511999999999",
-            tema: "gold",
-            banner: {
-                ativo: false,
-                titulo: "Novidade!",
-                texto: "Confira meus cursos e conteúdos exclusivos.",
-                imagem: "",
-                botaoTexto: "Quero saber mais",
-                botaoUrl: "https://",
-                delaySegundos: 1,
-                maxExibicoes: 3
-            },
-            categorias: [
-                {
-                    titulo: "Contato",
-                    links: [
-                        { titulo: "WhatsApp", subtitulo: "Conversar agora", url: "https://wa.me/5511999999999", icone: "fab fa-whatsapp", corIcone: "text-white", bgIcone: "bg-[#25D366]" },
-                        { titulo: "Instagram", subtitulo: "@Vagner_lauriuche", url: "https://instagram.com/Vagner_lauriuche", icone: "fab fa-instagram", corIcone: "text-white", bgIcone: "bg-gradient-to-br from-[#f09433] to-[#bc1888]" },
-                        { titulo: "Telegram", subtitulo: "@Lauriuche", url: "https://t.me/Lauriuche", icone: "fab fa-telegram", corIcone: "text-white", bgIcone: "bg-[#0088cc]" }
-                    ]
-                },
-                {
-                    titulo: "Conteúdo",
-                    links: [
-                        { titulo: "TikTok", subtitulo: "Vídeos curtos", url: "https://www.tiktok.com/@vagner_lauriuche", icone: "fab fa-tiktok", corIcone: "text-white", bgIcone: "bg-black" },
-                        { titulo: "YouTube", subtitulo: "Canal oficial", url: "https://youtube.com", icone: "fab fa-youtube", corIcone: "text-white", bgIcone: "bg-[#FF0000]" }
-                    ]
-                },
-                {
-                    titulo: "Formação & Cursos",
-                    links: [
-                        { titulo: "Portfólio de Cursos", subtitulo: "Lista completa", url: "https://kiwify.app/p5jTccC?afid=8UCMgMdG", icone: "fas fa-graduation-cap", corIcone: "text-white", bgIcone: "bg-ink-900" }
-                    ]
-                }
-            ]
-        };
+<div id="admin-modal" class="modal-overlay" style="display:none" onclick="fecharAdmin()">
+    <div class="modal-sheet" onclick="event.stopPropagation()" style="max-height:92vh">
+        <div class="p-5 overflow-y-auto max-h-[92vh]">
+            <div class="flex items-center justify-between mb-5">
+                <h3 class="font-display text-xl font-bold">Admin</h3>
+                <button type="button" onclick="fecharAdmin()" class="w-9 h-9 rounded-full bg-ink-100 dark:bg-ink-800 flex items-center justify-center"><i class="fas fa-times text-sm"></i></button>
+            </div>
 
-        let perfil = JSON.parse(JSON.stringify(defaultPerfil));
-        let longPressTimer = null;
-        let adminLinksTemp = [];
-        let temaSelecionado = "gold";
+            <div id="admin-login">
+                <p class="text-sm text-ink-500 mb-4">Acesso restrito</p>
+                <input type="password" id="admin-password" placeholder="Senha" class="w-full h-12 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-2xl px-4 mb-3 outline-none">
+                <button type="button" onclick="verificarSenhaAdmin()" class="w-full h-12 rounded-2xl accent-btn font-semibold">Entrar</button>
+            </div>
 
-        // ======================================================
-        // TEMA
-        // ======================================================
-        function aplicarTema(tema) {
-            document.documentElement.classList.remove('theme-gold','theme-sky','theme-emerald','theme-violet','theme-rose','theme-ink');
-            document.documentElement.classList.add('theme-' + (tema || 'gold'));
-            temaSelecionado = tema || 'gold';
-            document.querySelectorAll('.tema-btn').forEach(btn => {
-                btn.classList.remove('border-ink-900', 'dark:border-white');
-                if (btn.dataset.tema === temaSelecionado) btn.classList.add('border-ink-900', 'dark:border-white');
-            });
-        }
-        function selecionarTema(tema) { aplicarTema(tema); }
+            <div id="admin-content" class="hidden space-y-4">
+                <div class="flex gap-1.5 mb-1 flex-wrap">
+                    <button type="button" onclick="mostrarAbaAdmin('perfil')" id="tab-perfil" class="px-3 h-9 rounded-xl text-xs font-semibold accent-btn">Perfil</button>
+                    <button type="button" onclick="mostrarAbaAdmin('links')" id="tab-links" class="px-3 h-9 rounded-xl text-xs font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Links</button>
+                    <button type="button" onclick="mostrarAbaAdmin('banner')" id="tab-banner" class="px-3 h-9 rounded-xl text-xs font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Banner</button>
+                    <button type="button" onclick="mostrarAbaAdmin('tema')" id="tab-tema" class="px-3 h-9 rounded-xl text-xs font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Tema</button>
+                    <button type="button" onclick="mostrarAbaAdmin('stats')" id="tab-stats" class="px-3 h-9 rounded-xl text-xs font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Stats</button>
+                    <button type="button" onclick="mostrarAbaAdmin('sistema')" id="tab-sistema" class="px-3 h-9 rounded-xl text-xs font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300">Sistema</button>
+                </div>
 
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-        }
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        }
+                <div id="aba-perfil" class="space-y-3">
+                    <div><label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Usuário</label>
+                        <input id="adm-username" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none"></div>
+                    <div><label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Nome</label>
+                        <input id="adm-displayname" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none"></div>
+                    <div><label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Bio</label>
+                        <textarea id="adm-bio" rows="4" class="w-full mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 py-2.5 text-sm outline-none"></textarea></div>
+                    <div><label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Foto (URL)</label>
+                        <input id="adm-avatar" placeholder="https://..." class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none"></div>
+                    <div><label class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">WhatsApp</label>
+                        <input id="adm-whatsapp" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none" placeholder="5511999999999"></div>
+                </div>
 
-        // ======================================================
-        // BANNER
-        // ======================================================
-        function podeExibirBanner() {
-            const b = perfil.banner;
-            if (!b || !b.ativo) return false;
+                <div id="aba-links" class="hidden space-y-3">
+                    <div class="flex items-center justify-between">
+                        <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Links · arraste para reordenar</p>
+                        <button type="button" onclick="adicionarNovoLink()" class="text-xs font-semibold accent-text"><i class="fas fa-plus"></i> Novo</button>
+                    </div>
+                    <div id="admin-links-list" class="space-y-2 max-h-[48vh] overflow-y-auto pr-1"></div>
+                </div>
 
-            const max = parseInt(b.maxExibicoes, 10);
-            if (max === 0) return true; // sempre
+                <div id="aba-banner" class="hidden space-y-3">
+                    <div class="flex items-center justify-between">
+                        <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Banner</p>
+                        <label class="flex items-center gap-2 cursor-pointer"><span class="text-xs text-ink-500">Ativo</span>
+                            <input type="checkbox" id="adm-banner-ativo" class="w-5 h-5 rounded"></label>
+                    </div>
+                    <div><label class="text-[11px] text-ink-400 font-semibold">Título</label>
+                        <input id="adm-banner-titulo" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none"></div>
+                    <div><label class="text-[11px] text-ink-400 font-semibold">Texto</label>
+                        <textarea id="adm-banner-texto" rows="2" class="w-full mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 py-2 text-sm outline-none"></textarea></div>
+                    <div><label class="text-[11px] text-ink-400 font-semibold">Imagem URL</label>
+                        <input id="adm-banner-imagem" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none"></div>
+                    <div><label class="text-[11px] text-ink-400 font-semibold">Botão · texto</label>
+                        <input id="adm-banner-botao-texto" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none"></div>
+                    <div><label class="text-[11px] text-ink-400 font-semibold">Botão · link</label>
+                        <input id="adm-banner-botao-url" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none"></div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div><label class="text-[11px] text-ink-400 font-semibold">Delay (s)</label>
+                            <input type="number" id="adm-banner-delay" min="0" max="30" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm" value="1"></div>
+                        <div><label class="text-[11px] text-ink-400 font-semibold">Máx. exibições</label>
+                            <input type="number" id="adm-banner-max" min="0" max="99" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm" value="3">
+                            <p class="text-[10px] text-ink-400 mt-0.5">0 = sempre</p></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div><label class="text-[11px] text-ink-400 font-semibold">Início</label>
+                            <input type="date" id="adm-banner-inicio" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm"></div>
+                        <div><label class="text-[11px] text-ink-400 font-semibold">Fim</label>
+                            <input type="date" id="adm-banner-fim" class="w-full h-11 mt-1 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm"></div>
+                    </div>
+                    <button type="button" onclick="testarBanner()" class="w-full h-10 rounded-xl border border-ink-200 dark:border-ink-700 text-sm">Testar banner</button>
+                    <button type="button" onclick="resetBannerViews()" class="w-full h-9 rounded-xl text-xs text-ink-400">Zerar contagem (este aparelho)</button>
+                </div>
 
-            const key = 'banner_views_' + PROFILE_ID;
-            const count = parseInt(localStorage.getItem(key) || '0', 10);
-            return count < max;
-        }
+                <div id="aba-tema" class="hidden space-y-3">
+                    <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Presets</p>
+                    <div class="grid grid-cols-2 gap-2" id="tema-presets"></div>
+                    <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold mt-3">Cor de destaque</p>
+                    <div class="grid grid-cols-4 gap-2" id="tema-cores"></div>
+                </div>
 
-        function registrarExibicaoBanner() {
-            const b = perfil.banner;
-            if (!b || parseInt(b.maxExibicoes, 10) === 0) return;
-            const key = 'banner_views_' + PROFILE_ID;
-            const count = parseInt(localStorage.getItem(key) || '0', 10);
-            localStorage.setItem(key, String(count + 1));
-        }
+                <div id="aba-stats" class="hidden space-y-3">
+                    <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold">Cliques nos links</p>
+                    <div class="neo-card p-4">
+                        <div class="flex justify-between text-sm mb-2"><span class="text-ink-500">Total</span><strong id="stats-total">0</strong></div>
+                        <div id="stats-list" class="max-h-64 overflow-y-auto"></div>
+                    </div>
+                    <button type="button" onclick="carregarStats()" class="w-full h-10 rounded-xl border border-ink-200 dark:border-ink-700 text-sm">Atualizar stats</button>
+                    <button type="button" onclick="limparStats()" class="w-full h-9 rounded-xl text-xs text-red-500">Limpar todos os cliques</button>
+                </div>
 
-        function mostrarBanner() {
-            const b = perfil.banner || {};
-            document.getElementById('banner-titulo').innerText = b.titulo || 'Novidade';
-            document.getElementById('banner-texto').innerText = b.texto || '';
-            document.getElementById('banner-botao').innerText = b.botaoTexto || 'Saiba mais';
-            document.getElementById('banner-botao').href = b.botaoUrl || '#';
-
-            const imgWrap = document.getElementById('banner-imagem-wrap');
-            const img = document.getElementById('banner-imagem');
-            if (b.imagem) {
-                img.src = b.imagem;
-                imgWrap.classList.remove('hidden');
-            } else {
-                imgWrap.classList.add('hidden');
-            }
-
-            document.getElementById('banner-modal').style.display = 'flex';
-            registrarExibicaoBanner();
-        }
-
-        function fecharBanner(e) {
-            if (e) e.stopPropagation();
-            document.getElementById('banner-modal').style.display = 'none';
-        }
-
-        function agendarBanner() {
-            if (!podeExibirBanner()) return;
-            const delay = (parseInt(perfil.banner?.delaySegundos, 10) || 1) * 1000;
-            setTimeout(mostrarBanner, delay);
-        }
-
-        function testarBanner() {
-            // lê valores atuais do form sem salvar
-            const temp = {
-                ativo: true,
-                titulo: document.getElementById('adm-banner-titulo').value || 'Novidade',
-                texto: document.getElementById('adm-banner-texto').value || '',
-                imagem: document.getElementById('adm-banner-imagem').value || '',
-                botaoTexto: document.getElementById('adm-banner-botao-texto').value || 'Saiba mais',
-                botaoUrl: document.getElementById('adm-banner-botao-url').value || '#'
-            };
-            const old = perfil.banner;
-            perfil.banner = temp;
-            mostrarBanner();
-            perfil.banner = old;
-        }
-
-        // ======================================================
-        // SINCRONIZAÇÃO
-        // ======================================================
-        function iniciarSincronizacaoTempoReal() {
-            const ref = db.ref('profiles/' + PROFILE_ID);
-
-            ref.on('value', (snapshot) => {
-                const data = snapshot.val();
-
-                if (data) {
-                    perfil = {
-                        ...defaultPerfil,
-                        ...data,
-                        categorias: data.categorias || defaultPerfil.categorias,
-                        banner: { ...defaultPerfil.banner, ...(data.banner || {}) },
-                        tema: data.tema || 'gold'
-                    };
-                } else {
-                    ref.set(defaultPerfil);
-                    perfil = JSON.parse(JSON.stringify(defaultPerfil));
-                }
-
-                aplicarTema(perfil.tema || 'gold');
-                renderizarPerfil();
-                document.getElementById("loading-overlay").style.display = "none";
-                agendarBanner();
-            }, (error) => {
-                console.error(error);
-                perfil = JSON.parse(JSON.stringify(defaultPerfil));
-                aplicarTema('gold');
-                renderizarPerfil();
-                document.getElementById("loading-overlay").style.display = "none";
-            });
-        }
-
-        // ======================================================
-        // RENDER
-        // ======================================================
-        function renderizarPerfil() {
-            document.getElementById('display-name').innerText = perfil.nome || "Vagner Lauriuche";
-            document.getElementById('username-handle').innerText = `@${perfil.usuario || "Vagner_lauriuche"}`;
-            document.getElementById('bio-text').innerText = perfil.bio || "";
-
-            const fallback = "https://api.dicebear.com/9.x/avataaars/svg?seed=Vagner";
-            const img = document.getElementById('profile-img');
-            img.onerror = () => { img.src = fallback; };
-            img.src = perfil.imagem || fallback;
-            document.title = perfil.nome || "Vagner Lauriuche";
-
-            const wrapper = document.getElementById('links-wrapper');
-            wrapper.innerHTML = '';
-
-            (perfil.categorias || []).forEach(cat => {
-                let html = `
+                <div id="aba-sistema" class="hidden space-y-4">
                     <div>
-                        <h3 class="text-[11px] tracking-[0.2em] uppercase font-semibold text-ink-400 dark:text-ink-500 mb-3 px-1">${cat.titulo}</h3>
-                        <div class="space-y-2.5">
-                `;
-                (cat.links || []).forEach(link => {
-                    const href = link.url || '#';
-                    html += `
-                        <a href="\( {href}" target="_blank" onclick="registrarClique(' \){link.titulo}', '${link.url}')"
-                           class="neo-card flex items-center gap-4 p-4 cursor-pointer">
-                            <div class="w-11 h-11 ${link.bgIcone || 'bg-gray-800'} ${link.corIcone || 'text-white'} rounded-xl flex items-center justify-center text-lg flex-shrink-0">
-                                <i class="${link.icone || 'fas fa-link'}"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="font-semibold text-[15px] text-ink-900 dark:text-white">${link.titulo}</div>
-                                <div class="text-[12px] text-ink-400 dark:text-ink-500 mt-0.5 truncate">${link.subtitulo || ''}</div>
-                            </div>
-                            <i class="fas fa-arrow-up-right text-ink-300 dark:text-ink-600 text-xs"></i>
-                        </a>
-                    `;
-                });
-                html += `</div></div>`;
-                wrapper.innerHTML += html;
-            });
+                        <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold mb-2">Alterar senha do admin</p>
+                        <input type="password" id="adm-new-pass" placeholder="Nova senha" class="w-full h-11 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none mb-2">
+                        <input type="password" id="adm-new-pass2" placeholder="Confirmar senha" class="w-full h-11 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-xl px-3 text-sm outline-none mb-2">
+                        <button type="button" onclick="alterarSenhaAdmin()" class="w-full h-10 rounded-xl accent-btn text-sm font-semibold">Salvar nova senha</button>
+                    </div>
+                    <div class="border-t border-ink-100 dark:border-ink-800 pt-4">
+                        <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold mb-2">QR Code</p>
+                        <button type="button" onclick="abrirQR()" class="w-full h-10 rounded-xl border border-ink-200 dark:border-ink-700 text-sm">Gerar QR desta página</button>
+                    </div>
+                    <div class="border-t border-ink-100 dark:border-ink-800 pt-4">
+                        <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold mb-2">Backup</p>
+                        <button type="button" onclick="exportarPerfil()" class="w-full h-10 rounded-xl border border-ink-200 dark:border-ink-700 text-sm mb-2">Exportar JSON</button>
+                        <label class="w-full h-10 rounded-xl border border-ink-200 dark:border-ink-700 text-sm flex items-center justify-center cursor-pointer">
+                            Importar JSON
+                            <input type="file" accept="application/json,.json" class="hidden" onchange="importarPerfil(event)">
+                        </label>
+                    </div>
+                    <div class="border-t border-ink-100 dark:border-ink-800 pt-4">
+                        <p class="text-[11px] tracking-widest uppercase text-ink-400 font-semibold mb-2">Offline</p>
+                        <p class="text-xs text-ink-400" id="sw-status">Service Worker: verificando...</p>
+                    </div>
+                </div>
+
+                <button type="button" onclick="salvarPerfilAdmin()" id="btn-salvar" class="w-full h-12 rounded-2xl accent-btn font-semibold mt-2">Salvar no Firebase</button>
+                <p id="save-status" class="text-xs text-center text-ink-400"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function(){
+    var DEFAULT_PASSWORD = "admin123";
+    var PROFILE_ID = "vagner";
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyBBOiQd-zuLsUei5Q7aDRWoN7r-e2l8LBQ",
+        authDomain: "minha-bio-434e1.firebaseapp.com",
+        projectId: "minha-bio-434e1",
+        storageBucket: "minha-bio-434e1.firebasestorage.app",
+        messagingSenderId: "964235041188",
+        appId: "1:964235041188:web:af7fe7d8c1540605c10931",
+        measurementId: "G-XEETGVKLLD",
+        databaseURL: "https://minha-bio-434e1-default-rtdb.firebaseio.com"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.database();
+    var profileRef = db.ref("profiles/" + PROFILE_ID);
+    var configRef = db.ref("config/adminPassword");
+    var clicksRef = db.ref("link_clicks");
+
+    var ICONES = [
+        "fab fa-whatsapp","fab fa-instagram","fab fa-telegram","fab fa-tiktok","fab fa-youtube",
+        "fab fa-linkedin","fab fa-facebook","fab fa-twitter","fab fa-x-twitter","fab fa-spotify",
+        "fab fa-github","fab fa-discord","fab fa-twitch","fas fa-globe","fas fa-envelope",
+        "fas fa-phone","fas fa-link","fas fa-graduation-cap","fas fa-store","fas fa-calendar",
+        "fas fa-map-marker-alt","fas fa-file-pdf","fas fa-play","fas fa-shopping-cart","fas fa-heart"
+    ];
+    var TEMAS_PRESET = [
+        {id:"gold",nome:"Gold",accent:"gold"},
+        {id:"ocean",nome:"Ocean",accent:"ocean"},
+        {id:"forest",nome:"Forest",accent:"emerald"},
+        {id:"violet",nome:"Violet",accent:"violet"},
+        {id:"sunset",nome:"Sunset",accent:"sunset"},
+        {id:"noir",nome:"Noir",accent:"ink"}
+    ];
+    var CORES = ["gold","sky","emerald","violet","rose","ink","ocean","sunset"];
+    var COR_HEX = {gold:"#c9a227",sky:"#0ea5e9",emerald:"#10b981",violet:"#8b5cf6",rose:"#f43f5e",ink:"#1a1a1a",ocean:"#06b6d4",sunset:"#f97316"};
+
+    var defaultPerfil = {
+        usuario: "Vagner_lauriuche",
+        nome: "Vagner Lauriuche",
+        imagem: "foto.png",
+        bio: "Bacharel em Zootecnia  ·  MBA Agronegócios\nMBA Indústria, Produto e Inovação  ·  Administração\nVisual Content Creator",
+        whatsapp: "5511999999999",
+        tema: "gold",
+        banner: {
+            ativo: false, titulo: "Novidade!", texto: "Confira meus cursos e conteúdos exclusivos.",
+            imagem: "", botaoTexto: "Quero saber mais", botaoUrl: "https://",
+            delaySegundos: 1, maxExibicoes: 3, dataInicio: "", dataFim: ""
+        },
+        categorias: [
+            { titulo: "Contato", links: [
+                { titulo:"WhatsApp", subtitulo:"Conversar agora", url:"https://wa.me/5511999999999", icone:"fab fa-whatsapp", corIcone:"text-white", bgIcone:"bg-[#25D366]" },
+                { titulo:"Instagram", subtitulo:"@Vagner_lauriuche", url:"https://instagram.com/Vagner_lauriuche", icone:"fab fa-instagram", corIcone:"text-white", bgIcone:"bg-gradient-to-br from-[#f09433] to-[#bc1888]" },
+                { titulo:"Telegram", subtitulo:"@Lauriuche", url:"https://t.me/Lauriuche", icone:"fab fa-telegram", corIcone:"text-white", bgIcone:"bg-[#0088cc]" }
+            ]},
+            { titulo: "Conteúdo", links: [
+                { titulo:"TikTok", subtitulo:"Vídeos curtos", url:"https://www.tiktok.com/@vagner_lauriuche", icone:"fab fa-tiktok", corIcone:"text-white", bgIcone:"bg-black" },
+                { titulo:"YouTube", subtitulo:"Canal oficial", url:"https://youtube.com", icone:"fab fa-youtube", corIcone:"text-white", bgIcone:"bg-[#FF0000]" }
+            ]},
+            { titulo: "Formação & Cursos", links: [
+                { titulo:"Portfólio de Cursos", subtitulo:"Lista completa", url:"https://kiwify.app/p5jTccC?afid=8UCMgMdG", icone:"fas fa-graduation-cap", corIcone:"text-white", bgIcone:"bg-ink-900" }
+            ]}
+        ]
+    };
+
+    var perfil = JSON.parse(JSON.stringify(defaultPerfil));
+    var adminLinksTemp = [];
+    var temaSelecionado = "gold";
+    var adminPasswordAtual = DEFAULT_PASSWORD;
+    var longPressTimer = null;
+    var dragState = null;
+
+    function toArray(val) {
+        if (!val) return [];
+        if (Array.isArray(val)) return val;
+        if (typeof val === "object") {
+            return Object.keys(val).sort(function(a,b){ return Number(a)-Number(b); }).map(function(k){ return val[k]; });
         }
-
-        async function registrarClique(titulo, url) {
-            try {
-                await db.ref('link_clicks').push({
-                    profileId: PROFILE_ID,
-                    linkTitle: titulo,
-                    url,
-                    timestamp: firebase.database.ServerValue.TIMESTAMP,
-                    userAgent: navigator.userAgent
-                });
-            } catch (e) {}
-        }
-
-        // ======================================================
-        // ADMIN
-        // ======================================================
-        function abrirAdmin() {
-            document.getElementById('admin-modal').style.display = 'flex';
-            document.getElementById('admin-login').classList.remove('hidden');
-            document.getElementById('admin-content').classList.add('hidden');
-            document.getElementById('admin-password').value = '';
-        }
-        function fecharAdmin() {
-            document.getElementById('admin-modal').style.display = 'none';
-        }
-
-        function verificarSenhaAdmin() {
-            if (document.getElementById('admin-password').value === ADMIN_PASSWORD) {
-                document.getElementById('admin-login').classList.add('hidden');
-                document.getElementById('admin-content').classList.remove('hidden');
-                preencherFormAdmin();
-                mostrarAbaAdmin('perfil');
-            } else {
-                alert("Senha incorreta");
-            }
-        }
-
-        function mostrarAbaAdmin(aba) {
-            ['perfil','links','banner','tema'].forEach(a => {
-                document.getElementById('aba-' + a).classList.add('hidden');
-                const tab = document.getElementById('tab-' + a);
-                tab.className = "flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300";
-            });
-            document.getElementById('aba-' + aba).classList.remove('hidden');
-            document.getElementById('tab-' + aba).className = "flex-1 min-w-[70px] h-10 rounded-xl text-sm font-semibold accent-btn";
-
-            if (aba === 'links') renderizarLinksAdmin();
-            if (aba === 'tema') aplicarTema(temaSelecionado);
-        }
-
-        function preencherFormAdmin() {
-            document.getElementById('adm-username').value = perfil.usuario || '';
-            document.getElementById('adm-displayname').value = perfil.nome || '';
-            document.getElementById('adm-bio').value = perfil.bio || '';
-            document.getElementById('adm-avatar').value = perfil.imagem || '';
-            document.getElementById('adm-whatsapp').value = perfil.whatsapp || '';
-
-            const b = perfil.banner || defaultPerfil.banner;
-            document.getElementById('adm-banner-ativo').checked = !!b.ativo;
-            document.getElementById('adm-banner-titulo').value = b.titulo || '';
-            document.getElementById('adm-banner-texto').value = b.texto || '';
-            document.getElementById('adm-banner-imagem').value = b.imagem || '';
-            document.getElementById('adm-banner-botao-texto').value = b.botaoTexto || '';
-            document.getElementById('adm-banner-botao-url').value = b.botaoUrl || '';
-            document.getElementById('adm-banner-delay').value = b.delaySegundos ?? 1;
-            document.getElementById('adm-banner-max').value = b.maxExibicoes ?? 3;
-
-            adminLinksTemp = JSON.parse(JSON.stringify(perfil.categorias || []));
-            temaSelecionado = perfil.tema || 'gold';
-            aplicarTema(temaSelecionado);
-        }
-
-        function renderizarLinksAdmin() {
-            const container = document.getElementById('admin-links-list');
-            container.innerHTML = '';
-
-            adminLinksTemp.forEach((cat, catIndex) => {
-                const catHeader = document.createElement('div');
-                catHeader.className = "flex items-center gap-2 mb-2 mt-3";
-                catHeader.innerHTML = `
-                    <input value="\( {cat.titulo}" onchange="adminLinksTemp[ \){catIndex}].titulo = this.value"
-                           class="flex-1 h-9 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm font-semibold outline-none">
-                    <button onclick="removerCategoria(${catIndex})" class="w-8 h-8 rounded-lg bg-red-500/10 text-red-500 flex items-center justify-center">
-                        <i class="fas fa-trash text-xs"></i>
-                    </button>`;
-                container.appendChild(catHeader);
-
-                (cat.links || []).forEach((link, linkIndex) => {
-                    const div = document.createElement('div');
-                    div.className = "admin-link-item";
-                    div.innerHTML = `
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] text-ink-400 font-medium">Link ${linkIndex + 1}</span>
-                            <button onclick="removerLink(${catIndex}, ${linkIndex})" class="text-red-500 text-xs"><i class="fas fa-times"></i></button>
-                        </div>
-                        <input placeholder="Título" value="\( {link.titulo || ''}" onchange="adminLinksTemp[ \){catIndex}].links[${linkIndex}].titulo = this.value"
-                               class="w-full h-9 mb-1.5 bg-white dark:bg-ink-950 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm outline-none">
-                        <input placeholder="Subtítulo" value="\( {link.subtitulo || ''}" onchange="adminLinksTemp[ \){catIndex}].links[${linkIndex}].subtitulo = this.value"
-                               class="w-full h-9 mb-1.5 bg-white dark:bg-ink-950 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm outline-none">
-                        <input placeholder="URL" value="\( {link.url || ''}" onchange="adminLinksTemp[ \){catIndex}].links[${linkIndex}].url = this.value"
-                               class="w-full h-9 mb-1.5 bg-white dark:bg-ink-950 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm outline-none">
-                        <input placeholder="Ícone (fab fa-whatsapp)" value="\( {link.icone || ''}" onchange="adminLinksTemp[ \){catIndex}].links[${linkIndex}].icone = this.value"
-                               class="w-full h-9 bg-white dark:bg-ink-950 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm outline-none">
-                    `;
-                    container.appendChild(div);
-                });
-
-                const addBtn = document.createElement('button');
-                addBtn.className = "w-full h-9 rounded-lg border border-dashed border-ink-300 dark:border-ink-700 text-xs text-ink-500 mb-4";
-                addBtn.innerHTML = `<i class="fas fa-plus mr-1"></i> Adicionar link`;
-                addBtn.onclick = () => adicionarLinkNaCategoria(catIndex);
-                container.appendChild(addBtn);
-            });
-        }
-
-        function adicionarNovoLink() {
-            if (adminLinksTemp.length === 0) {
-                adminLinksTemp.push({
-                    titulo: "Nova Categoria",
-                    links: [{ titulo: "Novo Link", subtitulo: "", url: "https://", icone: "fas fa-link", corIcone: "text-white", bgIcone: "bg-gray-800" }]
-                });
-            } else {
-                adminLinksTemp[adminLinksTemp.length - 1].links.push({
-                    titulo: "Novo Link", subtitulo: "", url: "https://", icone: "fas fa-link", corIcone: "text-white", bgIcone: "bg-gray-800"
-                });
-            }
-            renderizarLinksAdmin();
-        }
-
-        function adicionarLinkNaCategoria(catIndex) {
-            adminLinksTemp[catIndex].links.push({
-                titulo: "Novo Link", subtitulo: "", url: "https://", icone: "fas fa-link", corIcone: "text-white", bgIcone: "bg-gray-800"
-            });
-            renderizarLinksAdmin();
-        }
-
-        function removerLink(catIndex, linkIndex) {
-            adminLinksTemp[catIndex].links.splice(linkIndex, 1);
-            if (adminLinksTemp[catIndex].links.length === 0) adminLinksTemp.splice(catIndex, 1);
-            renderizarLinksAdmin();
-        }
-
-        function removerCategoria(catIndex) {
-            if (confirm("Remover esta categoria?")) {
-                adminLinksTemp.splice(catIndex, 1);
-                renderizarLinksAdmin();
-            }
-        }
-
-        async function salvarPerfilAdmin() {
-            const btn = document.getElementById('btn-salvar');
-            btn.innerText = "Salvando...";
-            btn.disabled = true;
-
-            const novo = {
-                usuario: document.getElementById('adm-username').value.trim(),
-                nome: document.getElementById('adm-displayname').value.trim(),
-                bio: document.getElementById('adm-bio').value,
-                imagem: document.getElementById('adm-avatar').value.trim(),
-                whatsapp: document.getElementById('adm-whatsapp').value.trim(),
-                tema: temaSelecionado,
-                categorias: adminLinksTemp,
-                banner: {
-                    ativo: document.getElementById('adm-banner-ativo').checked,
-                    titulo: document.getElementById('adm-banner-titulo').value.trim(),
-                    texto: document.getElementById('adm-banner-texto').value.trim(),
-                    imagem: document.getElementById('adm-banner-imagem').value.trim(),
-                    botaoTexto: document.getElementById('adm-banner-botao-texto').value.trim() || "Saiba mais",
-                    botaoUrl: document.getElementById('adm-banner-botao-url').value.trim() || "#",
-                    delaySegundos: parseInt(document.getElementById('adm-banner-delay').value, 10) || 1,
-                    maxExibicoes: parseInt(document.getElementById('adm-banner-max').value, 10) || 0
-                },
-                updatedAt: firebase.database.ServerValue.TIMESTAMP
+        return [];
+    }
+    function normalizeCategorias(cats) {
+        return toArray(cats).map(function(cat) {
+            return {
+                titulo: (cat && cat.titulo) ? String(cat.titulo) : "Categoria",
+                links: toArray(cat && cat.links).map(function(link) {
+                    return {
+                        titulo: link && link.titulo != null ? String(link.titulo) : "",
+                        subtitulo: link && link.subtitulo != null ? String(link.subtitulo) : "",
+                        url: link && link.url != null ? String(link.url) : "",
+                        icone: link && link.icone ? String(link.icone) : "fas fa-link",
+                        corIcone: link && link.corIcone ? String(link.corIcone) : "text-white",
+                        bgIcone: link && link.bgIcone ? String(link.bgIcone) : "bg-gray-800"
+                    };
+                })
             };
-
-            try {
-                await db.ref('profiles/' + PROFILE_ID).update(novo);
-                alert("✅ Salvo com sucesso!");
-                fecharAdmin();
-            } catch (error) {
-                console.error(error);
-                alert("Erro ao salvar:\n" + error.message);
-            } finally {
-                btn.innerText = "Salvar no Firebase";
-                btn.disabled = false;
-            }
-        }
-
-        function iniciarLongPress() { longPressTimer = setTimeout(abrirAdmin, 800); }
-        function cancelarLongPress() { clearTimeout(longPressTimer); }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            aplicarTema('gold');
-            iniciarSincronizacaoTempoReal();
         });
-    </script>
+    }
+
+    function tituloValido(t) {
+        if (!t || typeof t !== "string") return false;
+        var s = t.trim();
+        if (!s) return false;
+        // filtra lixo de versões antigas com template quebrado
+        if (s.indexOf("{") !== -1 || s.indexOf("}") !== -1) return false;
+        if (s.indexOf("link.titulo") !== -1 || s.indexOf("link.titulo") !== -1) return false;
+        if (s.indexOf("tituloEsc") !== -1 || s.indexOf("${") !== -1) return false;
+        return true;
+    }
+
+    function aplicarTema(tema) {
+        ["theme-gold","theme-sky","theme-emerald","theme-violet","theme-rose","theme-ink","theme-ocean","theme-sunset"].forEach(function(c){
+            document.documentElement.classList.remove(c);
+        });
+        document.documentElement.classList.add("theme-" + (tema || "gold"));
+        temaSelecionado = tema || "gold";
+        document.querySelectorAll("[data-tema]").forEach(function(btn){
+            btn.classList.remove("border-ink-900","dark:border-white");
+            if (btn.getAttribute("data-tema") === temaSelecionado) btn.classList.add("border-ink-900","dark:border-white");
+        });
+    }
+    function selecionarTema(tema){ aplicarTema(tema); }
+    function toggleDarkMode(){
+        document.documentElement.classList.toggle("dark");
+        localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light");
+    }
+    if (localStorage.getItem("theme")==="dark" || (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+    }
+
+    function atualizarSEO(){
+        var nome = perfil.nome || "Vagner Lauriuche";
+        var bio = (perfil.bio || "").replace(/\n/g," · ").slice(0,160);
+        var img = perfil.imagem || "";
+        document.title = nome;
+        function set(id, attr, val){ var el=document.getElementById(id); if(el) el.setAttribute(attr, val); }
+        set("meta-desc","content",bio);
+        set("og-title","content",nome);
+        set("og-desc","content",bio);
+        set("og-image","content",img);
+        set("tw-title","content",nome);
+        set("tw-desc","content",bio);
+        var fav=document.getElementById("favicon"); if(fav && img) fav.href=img;
+    }
+
+    function dentroDoPeriodo(b){
+        var hoje = new Date(); hoje.setHours(0,0,0,0);
+        if (b.dataInicio){ var i=new Date(b.dataInicio+"T00:00:00"); if(hoje<i) return false; }
+        if (b.dataFim){ var f=new Date(b.dataFim+"T23:59:59"); if(hoje>f) return false; }
+        return true;
+    }
+    function podeExibirBanner(){
+        var b = perfil.banner;
+        if(!b||!b.ativo) return false;
+        if(localStorage.getItem("banner_never_"+PROFILE_ID)==="1") return false;
+        if(!dentroDoPeriodo(b)) return false;
+        var max = parseInt(b.maxExibicoes,10);
+        if(!max||max===0) return true;
+        var count = parseInt(localStorage.getItem("banner_views_"+PROFILE_ID)||"0",10);
+        return count < max;
+    }
+    function registrarExibicaoBanner(){
+        var b=perfil.banner;
+        if(!b||!parseInt(b.maxExibicoes,10)) return;
+        var key="banner_views_"+PROFILE_ID;
+        localStorage.setItem(key, String(parseInt(localStorage.getItem(key)||"0",10)+1));
+    }
+    function mostrarBanner(){
+        var b=perfil.banner||{};
+        document.getElementById("banner-titulo").textContent = b.titulo || "Novidade";
+        document.getElementById("banner-texto").textContent = b.texto || "";
+        document.getElementById("banner-botao").textContent = b.botaoTexto || "Saiba mais";
+        document.getElementById("banner-botao").href = b.botaoUrl || "#";
+        var w=document.getElementById("banner-imagem-wrap"), img=document.getElementById("banner-imagem");
+        if(b.imagem){ img.src=b.imagem; w.classList.remove("hidden"); } else w.classList.add("hidden");
+        document.getElementById("banner-modal").style.display="flex";
+        registrarExibicaoBanner();
+    }
+    function fecharBanner(e){ if(e) e.stopPropagation(); document.getElementById("banner-modal").style.display="none"; }
+    function naoMostrarBannerDeNovo(){ localStorage.setItem("banner_never_"+PROFILE_ID,"1"); fecharBanner(); }
+    function resetBannerViews(){ localStorage.removeItem("banner_views_"+PROFILE_ID); localStorage.removeItem("banner_never_"+PROFILE_ID); alert("Contagem zerada neste aparelho."); }
+    function agendarBanner(){
+        if(!podeExibirBanner()) return;
+        setTimeout(mostrarBanner, Math.max(0,(parseInt(perfil.banner&&perfil.banner.delaySegundos,10)||1)*1000));
+    }
+    function testarBanner(){
+        var old=perfil.banner;
+        perfil.banner={
+            ativo:true,
+            titulo:document.getElementById("adm-banner-titulo").value||"Novidade",
+            texto:document.getElementById("adm-banner-texto").value||"",
+            imagem:document.getElementById("adm-banner-imagem").value||"",
+            botaoTexto:document.getElementById("adm-banner-botao-texto").value||"Saiba mais",
+            botaoUrl:document.getElementById("adm-banner-botao-url").value||"#"
+        };
+        mostrarBanner();
+        perfil.banner=old;
+    }
+
+    function iniciarSincronizacaoTempoReal(){
+        profileRef.on("value", function(snap){
+            var data=snap.val();
+            if(data){
+                perfil=Object.assign({},defaultPerfil,data,{
+                    categorias:normalizeCategorias(data.categorias||defaultPerfil.categorias),
+                    banner:Object.assign({},defaultPerfil.banner,data.banner||{}),
+                    tema:data.tema||"gold"
+                });
+            } else {
+                profileRef.set(defaultPerfil);
+                perfil=JSON.parse(JSON.stringify(defaultPerfil));
+            }
+            aplicarTema(perfil.tema||"gold");
+            renderizarPerfil();
+            atualizarSEO();
+            document.getElementById("loading-overlay").style.display="none";
+            agendarBanner();
+        }, function(err){
+            console.error(err);
+            perfil=JSON.parse(JSON.stringify(defaultPerfil));
+            aplicarTema("gold"); renderizarPerfil(); atualizarSEO();
+            document.getElementById("loading-overlay").style.display="none";
+        });
+        configRef.on("value", function(snap){
+            var v=snap.val();
+            adminPasswordAtual = (v && typeof v==="string" && v.length) ? v : DEFAULT_PASSWORD;
+        });
+    }
+
+    function renderizarPerfil(){
+        document.getElementById("display-name").textContent = perfil.nome || "Vagner Lauriuche";
+        document.getElementById("username-handle").textContent = "@" + (perfil.usuario || "Vagner_lauriuche");
+        document.getElementById("bio-text").textContent = perfil.bio || "";
+        var fallback="https://api.dicebear.com/9.x/avataaars/svg?seed=Vagner";
+        var img=document.getElementById("profile-img");
+        img.onerror=function(){ img.src=fallback; };
+        img.src=perfil.imagem||fallback;
+
+        var wrapper=document.getElementById("links-wrapper");
+        wrapper.innerHTML="";
+        normalizeCategorias(perfil.categorias).forEach(function(cat){
+            var section=document.createElement("div");
+            var h3=document.createElement("h3");
+            h3.className="text-[11px] tracking-[0.2em] uppercase font-semibold text-ink-400 dark:text-ink-500 mb-3 px-1";
+            h3.textContent=cat.titulo;
+            section.appendChild(h3);
+            var list=document.createElement("div");
+            list.className="space-y-2.5";
+
+            (cat.links||[]).forEach(function(link){
+                // captura valores em strings locais (evita closure/template bug)
+                var tituloStr = String(link.titulo || "Link");
+                var urlStr = String(link.url || "#");
+
+                var a=document.createElement("a");
+                a.href=urlStr;
+                a.target="_blank";
+                a.rel="noopener";
+                a.className="neo-card flex items-center gap-4 p-4 cursor-pointer";
+                a.addEventListener("click", function(){
+                    registrarClique(tituloStr, urlStr);
+                });
+
+                var iconWrap=document.createElement("div");
+                iconWrap.className="w-11 h-11 "+(link.bgIcone||"bg-gray-800")+" "+(link.corIcone||"text-white")+" rounded-xl flex items-center justify-center text-lg flex-shrink-0";
+                var ic=document.createElement("i");
+                ic.className = link.icone || "fas fa-link";
+                iconWrap.appendChild(ic);
+
+                var textWrap=document.createElement("div");
+                textWrap.className="flex-1 min-w-0";
+                var t=document.createElement("div");
+                t.className="font-semibold text-[15px] text-ink-900 dark:text-white";
+                t.textContent = tituloStr;
+                var s=document.createElement("div");
+                s.className="text-[12px] text-ink-400 dark:text-ink-500 mt-0.5 truncate";
+                s.textContent = link.subtitulo || "";
+                textWrap.appendChild(t);
+                textWrap.appendChild(s);
+
+                var ch=document.createElement("i");
+                ch.className="fas fa-arrow-up-right text-ink-300 dark:text-ink-600 text-xs";
+
+                a.appendChild(iconWrap);
+                a.appendChild(textWrap);
+                a.appendChild(ch);
+                list.appendChild(a);
+            });
+            section.appendChild(list);
+            wrapper.appendChild(section);
+        });
+    }
+
+    function registrarClique(titulo, url){
+        var t = String(titulo || "").trim();
+        var u = String(url || "").trim();
+        if (!tituloValido(t)) t = "Link";
+        try {
+            clicksRef.push({
+                profileId: PROFILE_ID,
+                linkTitle: t,
+                url: u,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                userAgent: navigator.userAgent
+            });
+        } catch(e) {}
+    }
+
+    function abrirAdmin(){
+        document.getElementById("admin-modal").style.display="flex";
+        document.getElementById("admin-login").classList.remove("hidden");
+        document.getElementById("admin-content").classList.add("hidden");
+        document.getElementById("admin-password").value="";
+        document.getElementById("save-status").textContent="";
+    }
+    function fecharAdmin(){ document.getElementById("admin-modal").style.display="none"; }
+
+    function verificarSenhaAdmin(){
+        if(document.getElementById("admin-password").value === adminPasswordAtual){
+            document.getElementById("admin-login").classList.add("hidden");
+            document.getElementById("admin-content").classList.remove("hidden");
+            preencherFormAdmin();
+            montarTemaUI();
+            mostrarAbaAdmin("perfil");
+        } else alert("Senha incorreta");
+    }
+
+    function mostrarAbaAdmin(aba){
+        ["perfil","links","banner","tema","stats","sistema"].forEach(function(a){
+            document.getElementById("aba-"+a).classList.add("hidden");
+            document.getElementById("tab-"+a).className="px-3 h-9 rounded-xl text-xs font-semibold bg-ink-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300";
+        });
+        document.getElementById("aba-"+aba).classList.remove("hidden");
+        document.getElementById("tab-"+aba).className="px-3 h-9 rounded-xl text-xs font-semibold accent-btn";
+        if(aba==="links") renderizarLinksAdmin();
+        if(aba==="tema"){ montarTemaUI(); aplicarTema(temaSelecionado); }
+        if(aba==="stats") carregarStats();
+        if(aba==="sistema") atualizarSWStatus();
+    }
+
+    function preencherFormAdmin(){
+        document.getElementById("adm-username").value = perfil.usuario || "";
+        document.getElementById("adm-displayname").value = perfil.nome || "";
+        document.getElementById("adm-bio").value = perfil.bio || "";
+        document.getElementById("adm-avatar").value = perfil.imagem || "";
+        document.getElementById("adm-whatsapp").value = perfil.whatsapp || "";
+        var b = perfil.banner || defaultPerfil.banner;
+        document.getElementById("adm-banner-ativo").checked = !!b.ativo;
+        document.getElementById("adm-banner-titulo").value = b.titulo || "";
+        document.getElementById("adm-banner-texto").value = b.texto || "";
+        document.getElementById("adm-banner-imagem").value = b.imagem || "";
+        document.getElementById("adm-banner-botao-texto").value = b.botaoTexto || "";
+        document.getElementById("adm-banner-botao-url").value = b.botaoUrl || "";
+        document.getElementById("adm-banner-delay").value = b.delaySegundos != null ? b.delaySegundos : 1;
+        document.getElementById("adm-banner-max").value = b.maxExibicoes != null ? b.maxExibicoes : 3;
+        document.getElementById("adm-banner-inicio").value = b.dataInicio || "";
+        document.getElementById("adm-banner-fim").value = b.dataFim || "";
+        adminLinksTemp = normalizeCategorias(perfil.categorias);
+        temaSelecionado = perfil.tema || "gold";
+        aplicarTema(temaSelecionado);
+    }
+
+    function montarTemaUI(){
+        var presets=document.getElementById("tema-presets");
+        presets.innerHTML="";
+        TEMAS_PRESET.forEach(function(p){
+            var btn=document.createElement("button");
+            btn.type="button";
+            btn.setAttribute("data-tema", p.accent);
+            btn.className="h-12 rounded-xl border-2 border-transparent text-sm font-medium bg-ink-50 dark:bg-ink-900";
+            btn.textContent=p.nome;
+            btn.onclick=function(){ selecionarTema(p.accent); };
+            presets.appendChild(btn);
+        });
+        var cores=document.getElementById("tema-cores");
+        cores.innerHTML="";
+        CORES.forEach(function(c){
+            var btn=document.createElement("button");
+            btn.type="button";
+            btn.setAttribute("data-tema", c);
+            btn.className="h-12 rounded-xl border-2 border-transparent flex items-center justify-center";
+            var sp=document.createElement("span");
+            sp.className="w-6 h-6 rounded-full";
+            sp.style.background = COR_HEX[c] || "#999";
+            btn.appendChild(sp);
+            btn.onclick=function(){ selecionarTema(c); };
+            cores.appendChild(btn);
+        });
+        aplicarTema(temaSelecionado);
+    }
+
+    function renderizarLinksAdmin(){
+        var container=document.getElementById("admin-links-list");
+        container.innerHTML="";
+        adminLinksTemp=normalizeCategorias(adminLinksTemp);
+
+        adminLinksTemp.forEach(function(cat, catIndex){
+            var catBlock=document.createElement("div");
+            catBlock.className="mb-2";
+            catBlock.setAttribute("draggable","true");
+            catBlock.dataset.catIndex=String(catIndex);
+
+            catBlock.addEventListener("dragstart", function(e){
+                dragState={type:"cat", from:catIndex};
+                catBlock.classList.add("dragging");
+                e.dataTransfer.effectAllowed="move";
+            });
+            catBlock.addEventListener("dragend", function(){
+                catBlock.classList.remove("dragging");
+                dragState=null;
+                document.querySelectorAll(".drag-over").forEach(function(el){ el.classList.remove("drag-over"); });
+            });
+            catBlock.addEventListener("dragover", function(e){
+                e.preventDefault();
+                if(dragState&&dragState.type==="cat") catBlock.classList.add("drag-over");
+            });
+            catBlock.addEventListener("dragleave", function(){ catBlock.classList.remove("drag-over"); });
+            catBlock.addEventListener("drop", function(e){
+                e.preventDefault();
+                catBlock.classList.remove("drag-over");
+                if(!dragState||dragState.type!=="cat") return;
+                var from=dragState.from, to=catIndex;
+                if(from===to) return;
+                var item=adminLinksTemp.splice(from,1)[0];
+                adminLinksTemp.splice(to,0,item);
+                renderizarLinksAdmin();
+            });
+
+            var catHeader=document.createElement("div");
+            catHeader.className="flex items-center gap-1 mb-2 mt-2";
+            var handle=document.createElement("span");
+            handle.className="drag-handle";
+            handle.innerHTML='<i class="fas fa-grip-vertical"></i>';
+            var catInput=document.createElement("input");
+            catInput.type="text";
+            catInput.className="flex-1 h-9 bg-ink-50 dark:bg-ink-900 border border-ink-100 dark:border-ink-800 rounded-lg px-3 text-sm font-semibold outline-none";
+            catInput.value=cat.titulo||"";
+            catInput.addEventListener("input", function(){ adminLinksTemp[catIndex].titulo=catInput.value; });
+            var delCat=document.createElement("button");
+            delCat.type="button";
+            delCat.className="w-8 h-8 rounded-lg bg-red-500/10 text-red-500 flex items-center justify-center";
+            delCat.innerHTML='<i class="fas fa-trash text-xs"></i>';
+            delCat.onclick=function(){ removerCategoria(catIndex); };
+            catHeader.appendChild(handle);
+            catHeader.appendChild(catInput);
+            catHeader.appendChild(delCat);
+            catBlock.appendChild(catHeader);
+
+            (cat.links||[]).forEach(function(link, linkIndex){
+                var div=document.createElement("div");
+                div.className="admin-link-item";
+                div.setAttribute("draggable","true");
+
+                div.addEventListener("dragstart", function(e){
+                    dragState={type:"link", cat:catIndex, from:linkIndex};
+                    div.classList.add("dragging");
+                    e.dataTransfer.effectAllowed="move";
+                    e.stopPropagation();
+                });
+                div.addEventListener("dragend", function(){
+                    div.classList.remove("dragging");
+                    dragState=null;
+                    document.querySelectorAll(".drag-over").forEach(function(el){ el.classList.remove("drag-over"); });
+                });
+                div.addEventListener("dragover", function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if(dragState&&dragState.type==="link"&&dragState.cat===catIndex) div.classList.add("drag-over");
+                });
+                div.addEventListener("dragleave", function(){ div.classList.remove("drag-over"); });
+                div.addEventListener("drop", function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    div.classList.remove("drag-over");
+                    if(!dragState||dragState.type!=="link"||dragState.cat!==catIndex) return;
+                    var from=dragState.from, to=linkIndex;
+                    if(from===to) return;
+                    var arr=adminLinksTemp[catIndex].links;
+                    var item=arr.splice(from,1)[0];
+                    arr.splice(to,0,item);
+                    renderizarLinksAdmin();
+                });
+
+                var top=document.createElement("div");
+                top.className="flex justify-between items-center mb-2";
+                var lab=document.createElement("span");
+                lab.className="drag-handle text-xs";
+                lab.innerHTML='<i class="fas fa-grip-vertical"></i> Link '+(linkIndex+1);
+                top.appendChild(lab);
+                var del=document.createElement("button");
+                del.type="button";
+                del.className="text-red-500 text-xs";
+                del.innerHTML='<i class="fas fa-times"></i>';
+                del.onclick=function(){ removerLink(catIndex,linkIndex); };
+                top.appendChild(del);
+                div.appendChild(top);
+
+                function field(ph, val, key){
+                    var inp=document.createElement("input");
+                    inp.type="text";
+                    inp.className="input-admin";
+                    inp.placeholder=ph;
+                    inp.value=val||"";
+                    inp.addEventListener("input", function(){
+                        if(adminLinksTemp[catIndex]&&adminLinksTemp[catIndex].links[linkIndex]) {
+                            adminLinksTemp[catIndex].links[linkIndex][key]=inp.value;
+                        }
+                    });
+                    return inp;
+                }
+                div.appendChild(field("Título", link.titulo, "titulo"));
+                div.appendChild(field("Subtítulo", link.subtitulo, "subtitulo"));
+                div.appendChild(field("URL", link.url, "url"));
+
+                var iconRow=document.createElement("div");
+                iconRow.className="flex gap-2 items-center";
+                var iconInp=document.createElement("input");
+                iconInp.type="text";
+                iconInp.className="input-admin mb-0 flex-1";
+                iconInp.placeholder="Ícone";
+                iconInp.value=link.icone||"";
+                iconInp.addEventListener("input", function(){
+                    if(adminLinksTemp[catIndex]&&adminLinksTemp[catIndex].links[linkIndex]) {
+                        adminLinksTemp[catIndex].links[linkIndex].icone=iconInp.value;
+                    }
+                });
+                var pickBtn=document.createElement("button");
+                pickBtn.type="button";
+                pickBtn.className="h-9 px-3 rounded-lg border border-ink-200 dark:border-ink-700 text-sm flex-shrink-0";
+                var pic=document.createElement("i");
+                pic.className=link.icone||"fas fa-icons";
+                pickBtn.appendChild(pic);
+                pickBtn.onclick=function(){ abrirIconPicker(catIndex, linkIndex, pickBtn, iconInp); };
+                iconRow.appendChild(iconInp);
+                iconRow.appendChild(pickBtn);
+                div.appendChild(iconRow);
+                catBlock.appendChild(div);
+            });
+
+            var addBtn=document.createElement("button");
+            addBtn.type="button";
+            addBtn.className="w-full h-9 rounded-lg border border-dashed border-ink-300 dark:border-ink-700 text-xs text-ink-500 mb-3";
+            addBtn.innerHTML='<i class="fas fa-plus mr-1"></i> Adicionar link';
+            addBtn.onclick=function(){ adicionarLinkNaCategoria(catIndex); };
+            catBlock.appendChild(addBtn);
+            container.appendChild(catBlock);
+        });
+    }
+
+    function adicionarNovoLink(){
+        adminLinksTemp=normalizeCategorias(adminLinksTemp);
+        if(!adminLinksTemp.length){
+            adminLinksTemp.push({titulo:"Nova Categoria", links:[{titulo:"Novo Link",subtitulo:"",url:"https://",icone:"fas fa-link",corIcone:"text-white",bgIcone:"bg-gray-800"}]});
+        } else {
+            adminLinksTemp[adminLinksTemp.length-1].links.push({titulo:"Novo Link",subtitulo:"",url:"https://",icone:"fas fa-link",corIcone:"text-white",bgIcone:"bg-gray-800"});
+        }
+        renderizarLinksAdmin();
+    }
+    function adicionarLinkNaCategoria(i){
+        adminLinksTemp=normalizeCategorias(adminLinksTemp);
+        if(!adminLinksTemp[i]) return;
+        adminLinksTemp[i].links.push({titulo:"Novo Link",subtitulo:"",url:"https://",icone:"fas fa-link",corIcone:"text-white",bgIcone:"bg-gray-800"});
+        renderizarLinksAdmin();
+    }
+    function removerLink(c,l){
+        adminLinksTemp=normalizeCategorias(adminLinksTemp);
+        if(!adminLinksTemp[c]) return;
+        adminLinksTemp[c].links.splice(l,1);
+        if(!adminLinksTemp[c].links.length) adminLinksTemp.splice(c,1);
+        renderizarLinksAdmin();
+    }
+    function removerCategoria(c){
+        if(!confirm("Remover categoria?")) return;
+        adminLinksTemp=normalizeCategorias(adminLinksTemp);
+        adminLinksTemp.splice(c,1);
+        renderizarLinksAdmin();
+    }
+
+    function abrirIconPicker(catIndex, linkIndex, pickBtn, iconInp){
+        var grid=document.getElementById("icon-grid");
+        grid.innerHTML="";
+        ICONES.forEach(function(ic){
+            var b=document.createElement("button");
+            b.type="button";
+            var i=document.createElement("i");
+            i.className=ic;
+            b.appendChild(i);
+            var atual = adminLinksTemp[catIndex] && adminLinksTemp[catIndex].links[linkIndex] && adminLinksTemp[catIndex].links[linkIndex].icone;
+            if(atual===ic) b.classList.add("selected");
+            b.onclick=function(){
+                adminLinksTemp[catIndex].links[linkIndex].icone=ic;
+                iconInp.value=ic;
+                pickBtn.innerHTML="";
+                var ni=document.createElement("i");
+                ni.className=ic;
+                pickBtn.appendChild(ni);
+                fecharIconPicker();
+            };
+            grid.appendChild(b);
+        });
+        document.getElementById("icon-picker-modal").style.display="flex";
+    }
+    function fecharIconPicker(e){ if(e) e.stopPropagation(); document.getElementById("icon-picker-modal").style.display="none"; }
+
+    function carregarStats(){
+        var list=document.getElementById("stats-list");
+        list.innerHTML="";
+        var loading=document.createElement("p");
+        loading.className="text-xs text-ink-400";
+        loading.textContent="Carregando...";
+        list.appendChild(loading);
+
+        clicksRef.orderByChild("profileId").equalTo(PROFILE_ID).once("value")
+            .then(function(snap){
+                var counts={};
+                var total=0;
+                snap.forEach(function(ch){
+                    var v=ch.val();
+                    if(!v) return;
+                    var t = v.linkTitle != null ? String(v.linkTitle) : "";
+                    if(!tituloValido(t)) return; // ignora lixo antigo
+                    counts[t]=(counts[t]||0)+1;
+                    total++;
+                });
+                document.getElementById("stats-total").textContent=String(total);
+                list.innerHTML="";
+                var entries=Object.keys(counts).map(function(k){ return {t:k,c:counts[k]}; })
+                    .sort(function(a,b){ return b.c-a.c; });
+                if(!entries.length){
+                    var empty=document.createElement("p");
+                    empty.className="text-xs text-ink-400";
+                    empty.textContent="Nenhum clique válido ainda.";
+                    list.appendChild(empty);
+                    return;
+                }
+                entries.forEach(function(e){
+                    var row=document.createElement("div");
+                    row.className="stat-row text-sm";
+                    var left=document.createElement("span");
+                    left.className="truncate pr-2";
+                    left.textContent=e.t;
+                    var right=document.createElement("strong");
+                    right.textContent=String(e.c);
+                    row.appendChild(left);
+                    row.appendChild(right);
+                    list.appendChild(row);
+                });
+            })
+            .catch(function(err){
+                list.innerHTML="";
+                var p=document.createElement("p");
+                p.className="text-xs text-red-500";
+                p.textContent="Erro: "+err.message;
+                list.appendChild(p);
+            });
+    }
+
+    function limparStats(){
+        if(!confirm("Apagar TODOS os cliques registrados deste perfil?")) return;
+        clicksRef.orderByChild("profileId").equalTo(PROFILE_ID).once("value")
+            .then(function(snap){
+                var updates={};
+                snap.forEach(function(ch){ updates[ch.key]=null; });
+                return clicksRef.update(updates);
+            })
+            .then(function(){
+                alert("Cliques limpos.");
+                carregarStats();
+            })
+            .catch(function(e){ alert("Erro: "+e.message); });
+    }
+
+    function alterarSenhaAdmin(){
+        var p1=document.getElementById("adm-new-pass").value;
+        var p2=document.getElementById("adm-new-pass2").value;
+        if(!p1||p1.length<4){ alert("Senha mínima: 4 caracteres"); return; }
+        if(p1!==p2){ alert("Senhas não conferem"); return; }
+        configRef.set(p1).then(function(){
+            adminPasswordAtual=p1;
+            document.getElementById("adm-new-pass").value="";
+            document.getElementById("adm-new-pass2").value="";
+            alert("Senha atualizada no Firebase.");
+        }).catch(function(e){ alert("Erro: "+e.message); });
+    }
+
+    function abrirQR(){
+        var url=window.location.href.split("#")[0];
+        var qr="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(url);
+        document.getElementById("qr-img").src=qr;
+        document.getElementById("qr-url").textContent=url;
+        document.getElementById("qr-download").href=qr;
+        document.getElementById("qr-modal").style.display="flex";
+    }
+    function fecharQR(e){ if(e) e.stopPropagation(); document.getElementById("qr-modal").style.display="none"; }
+
+    function exportarPerfil(){
+        var data=JSON.stringify({
+            usuario:perfil.usuario, nome:perfil.nome, bio:perfil.bio, imagem:perfil.imagem,
+            whatsapp:perfil.whatsapp, tema:perfil.tema, banner:perfil.banner, categorias:perfil.categorias
+        }, null, 2);
+        var blob=new Blob([data],{type:"application/json"});
+        var a=document.createElement("a");
+        a.href=URL.createObjectURL(blob);
+        a.download="bio-backup-"+Date.now()+".json";
+        a.click();
+    }
+    function importarPerfil(ev){
+        var file=ev.target.files&&ev.target.files[0];
+        if(!file) return;
+        var reader=new FileReader();
+        reader.onload=function(){
+            try{
+                var data=JSON.parse(reader.result);
+                if(!data||typeof data!=="object") throw new Error("JSON inválido");
+                if(data.categorias) data.categorias=normalizeCategorias(data.categorias);
+                profileRef.set(Object.assign({}, defaultPerfil, data, {updatedAt:Date.now()}))
+                    .then(function(){ alert("Importado com sucesso!"); fecharAdmin(); })
+                    .catch(function(e){ alert("Erro: "+e.message); });
+            }catch(e){ alert("Arquivo inválido: "+e.message); }
+        };
+        reader.readAsText(file);
+        ev.target.value="";
+    }
+
+    function salvarPerfilAdmin(){
+        var btn=document.getElementById("btn-salvar");
+        var status=document.getElementById("save-status");
+        btn.textContent="Salvando...";
+        btn.disabled=true;
+        status.textContent="Enviando...";
+        status.style.color="";
+
+        var payload={
+            usuario:document.getElementById("adm-username").value.trim(),
+            nome:document.getElementById("adm-displayname").value.trim(),
+            bio:document.getElementById("adm-bio").value,
+            imagem:document.getElementById("adm-avatar").value.trim(),
+            whatsapp:document.getElementById("adm-whatsapp").value.trim(),
+            tema:temaSelecionado,
+            categorias:normalizeCategorias(adminLinksTemp),
+            banner:{
+                ativo:document.getElementById("adm-banner-ativo").checked,
+                titulo:document.getElementById("adm-banner-titulo").value.trim(),
+                texto:document.getElementById("adm-banner-texto").value.trim(),
+                imagem:document.getElementById("adm-banner-imagem").value.trim(),
+                botaoTexto:document.getElementById("adm-banner-botao-texto").value.trim()||"Saiba mais",
+                botaoUrl:document.getElementById("adm-banner-botao-url").value.trim()||"#",
+                delaySegundos:parseInt(document.getElementById("adm-banner-delay").value,10)||1,
+                maxExibicoes:parseInt(document.getElementById("adm-banner-max").value,10)||0,
+                dataInicio:document.getElementById("adm-banner-inicio").value||"",
+                dataFim:document.getElementById("adm-banner-fim").value||""
+            },
+            updatedAt:Date.now()
+        };
+
+        profileRef.set(payload).then(function(){
+            status.textContent="Salvo!";
+            status.style.color="#10b981";
+            btn.textContent="Salvar no Firebase";
+            btn.disabled=false;
+            alert("Salvo com sucesso!");
+            fecharAdmin();
+        }).catch(function(error){
+            console.error(error);
+            var msg=error.message||String(error);
+            if(String(error.code||"").indexOf("PERMISSION")!==-1 || msg.indexOf("PERMISSION_DENIED")!==-1){
+                msg="PERMISSION_DENIED — publique Rules com read/write true.";
+            }
+            status.textContent="Erro";
+            status.style.color="#ef4444";
+            alert("Erro ao salvar:\n"+msg);
+            btn.textContent="Salvar no Firebase";
+            btn.disabled=false;
+        });
+    }
+
+    function registrarSW(){
+        if(!("serviceWorker" in navigator)){ atualizarSWStatus(); return; }
+        var swCode="const CACHE='bio-v2';self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./'])));});self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim());});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{try{const x=res.clone();caches.open(CACHE).then(c=>c.put(e.request,x));}catch(e){}return res;}).catch(()=>caches.match('./'))));});";
+        var blob=new Blob([swCode],{type:"application/javascript"});
+        var url=URL.createObjectURL(blob);
+        navigator.serviceWorker.register(url).then(function(){ atualizarSWStatus(); }).catch(function(){ atualizarSWStatus(); });
+    }
+    function atualizarSWStatus(){
+        var el=document.getElementById("sw-status");
+        if(!el) return;
+        if(!("serviceWorker" in navigator)){ el.textContent="Service Worker não suportado."; return; }
+        navigator.serviceWorker.getRegistration().then(function(reg){
+            el.textContent = reg ? "Service Worker ativo (cache offline básico)." : "SW não registrado (use HTTPS ou localhost).";
+        });
+    }
+
+    function iniciarLongPress(){ longPressTimer=setTimeout(abrirAdmin,800); }
+    function cancelarLongPress(){ clearTimeout(longPressTimer); }
+
+    window.toggleDarkMode=toggleDarkMode;
+    window.abrirAdmin=abrirAdmin;
+    window.fecharAdmin=fecharAdmin;
+    window.verificarSenhaAdmin=verificarSenhaAdmin;
+    window.mostrarAbaAdmin=mostrarAbaAdmin;
+    window.salvarPerfilAdmin=salvarPerfilAdmin;
+    window.adicionarNovoLink=adicionarNovoLink;
+    window.testarBanner=testarBanner;
+    window.resetBannerViews=resetBannerViews;
+    window.fecharBanner=fecharBanner;
+    window.naoMostrarBannerDeNovo=naoMostrarBannerDeNovo;
+    window.fecharIconPicker=fecharIconPicker;
+    window.carregarStats=carregarStats;
+    window.limparStats=limparStats;
+    window.alterarSenhaAdmin=alterarSenhaAdmin;
+    window.abrirQR=abrirQR;
+    window.fecharQR=fecharQR;
+    window.exportarPerfil=exportarPerfil;
+    window.importarPerfil=importarPerfil;
+    window.iniciarLongPress=iniciarLongPress;
+    window.cancelarLongPress=cancelarLongPress;
+    window.selecionarTema=selecionarTema;
+
+    document.addEventListener("DOMContentLoaded", function(){
+        aplicarTema("gold");
+        iniciarSincronizacaoTempoReal();
+        registrarSW();
+    });
+})();
+</script>
 </body>
 </html>
